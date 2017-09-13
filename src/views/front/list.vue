@@ -6,7 +6,7 @@
 			main.g-mn.f-flex-item-1
 				transition(name="fade")
 					ul.article-list(v-show="articles.length")
-						list-item(v-for="item in articles", :item="item")
+						list-item(v-for="item in articles", :item="item",:key="item.id")
 				p.none(v-show="!articles.length") 暂无内容
 
 			aside.g-sd
