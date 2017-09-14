@@ -60,10 +60,14 @@ module.exports = {
   ],
   devServer: {
     historyApiFallback: true,
-    noInfo: true
+    //noInfo: false,
+    proxy:{
+      "/resource/*":"http://138.68.235.110"
+    }
   },
   devtool: '#eval-source-map'
 }
+
 
 if (process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map'
