@@ -17,8 +17,8 @@ const getUrl = (name, params = {}) => {
 	url = url.replace(/:(\w+)/g, (match, key) => {
 		return params[key]
 	})
-	return url
-	// return isProduction ? url : 'http://localhost:3000' + url
+	// return url
+	return isProduction ? url : 'http://localhost:3000' + url
 }
 
 
