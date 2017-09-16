@@ -2,19 +2,15 @@
 
 > A Vue.js blog
 
-`
-    xu
-`
-
 ## Hint
 
-please read and run server folder first `/blog/server`
+please read and run server folder first `node_server`
 
 ## How to use
 
 1. install dependencies  `npm install`
 
-2. serve with hot reload at localhost:8080  `npm run dev`
+1. serve with hot reload at localhost:8080  `npm run dev`
 
 - index  [localhost:8080](http://localhost:8080)
 - admin  [localhost:8080/admin](http://localhost:8080/admin)  user `test`  pwd `test`
@@ -23,19 +19,19 @@ please read and run server folder first `/blog/server`
 
 build for production with minification  `npm run build` and move them to server folder run `gulp`
 
+* * *
 
-
-# Chinese
+### Chinese
 
 ## 提示
 
-运行前请先查阅server文件夹 `/blog/server`
+运行前请先查阅server文件夹 `node_server`
 
 ## 怎样使用
 
 1. 安装依赖  `npm install`
 
-2. 在localhost:8080上启动程序  `npm run dev`
+1. 在localhost:8080上启动程序  `npm run dev`
 
 - 首页  [localhost:8080](http://localhost:8080)
 - 后台  [localhost:8080/admin](http://localhost:8080/admin)  账号 `test`  密码 `test`
