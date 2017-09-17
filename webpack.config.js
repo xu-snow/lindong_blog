@@ -8,7 +8,7 @@ function resolve(dir) {
 
 module.exports = {
     entry: {
-        main: './src/main.js',
+        main: './src/main',
         vendor: ['jquery', './src/req/index.js']
     },
     output: {
@@ -19,11 +19,23 @@ module.exports = {
     resolveLoader: {
         modules: [path.join(__dirname, 'node_modules')],
     },
+    resolve: {
+        extensions: ['.ts', '.js', '.vue']
+    },
+
     module: {
         loaders: [{
+                test: /\.ts$/,
+                exclude: /node_modules|vue\/src/,
+                loader: 'awesome-typescript-loader',
+                options: {
+                    appendTsSuffixTo: [/\.vue$/]
+                }
+            },
+            {
                 test: /\.vue$/,
                 use: ["vue-loader"],
-                include: [resolve('src')]
+                include: [resolve('src')],
             },
             {
                 test: /\.css$/,
