@@ -67,7 +67,7 @@
         "suppressImplicitAnyIndexErrors": true
     },
     "include": [
-        "./src/**/*"
+        "./src/**/*.ts"
     ],
     "compileOnSave": false //布尔类型，用于 IDE 保存时是否生成编译后的文件
 }
