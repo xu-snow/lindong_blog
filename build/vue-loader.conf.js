@@ -16,5 +16,5 @@ module.exports = {
     image: 'xlink:href'
   },
   //自己加的
-  appendTsSuffixTo: [/\.vue$/]
+  esModule: true
 }

@@ -7,11 +7,11 @@ let router = new VueRouter({
 	routes: [
 		{	
 			path: '/', 
-			component: r => {require.ensure(['../views/front/app.vue'], () => {r(require('../views/front/app.vue'))})},
+			component: r => {require.ensure(['../views/front/app'], () => {r(require('../views/front/app'))})},
 			redirect: 'articles',
 			children: [
-				{path: 'articles', component: r => {require.ensure(['../views/front/list.vue'], () => {r(require('../views/front/list.vue'))})}},
-				{path: 'articles/:id', component: r => {require.ensure(['../views/front/article.vue'], () => {r(require('../views/front/article.vue'))})}}
+				{path: 'articles', component: r => {require.ensure(['../views/front/list'], () => {r(require('../views/front/list'))})}},
+				{path: 'articles/:id', component: r => {require.ensure(['../views/front/article'], () => {r(require('../views/front/article'))})}}
 			]
 		},
 		{	

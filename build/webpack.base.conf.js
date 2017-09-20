@@ -30,7 +30,7 @@ module.exports = {
     rules: [
       {
         test: /\.ts$/,
-        exclude: /node_modules|vue\/src/,
+        exclude:/node_modules/,  ///node_modules|vue\/src/
         loader: 'awesome-typescript-loader',
         options: {
           appendTsSuffixTo: [/\.vue$/]
