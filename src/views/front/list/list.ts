@@ -1,15 +1,12 @@
 import Vue from '@/Base'
-// import Vue,{ComponentOptions} from 'vue'
 import { Component, Watch, Prop } from 'vue-property-decorator'
 import template from './list.vue'
-import myHead from '@/components/front/head.vue'
-import myFoot from '@/components/front/foot.vue'
-import sideClass from '@/components/front/class.vue'
-import sideAbout from '@/components/front/about.vue'
-import listItem from '@/components/front/item.vue'
+import myHead from '@/components/front/head'
+import myFoot from '@/components/front/foot'
+import sideClass from '@/components/front/class'
+import sideAbout from '@/components/front/about'
+import listItem from '@/components/front/item'
 import { resource } from '@/req'
-import VueRouter from 'vue-router'
-// import Component from 'vue-class-component'
 @Component({
     mixins: [template],
     components: {
@@ -21,7 +18,6 @@ import VueRouter from 'vue-router'
     }
 })
 export default class Article extends Vue {
-
     articles: any =[]
     beforeRouteEnter(to: any, from: any, next: any) {
         resource.articles.get(to.query).then(res => {
@@ -30,7 +26,6 @@ export default class Article extends Vue {
             })
         })
     }
-
     @Watch('$route')
     onRouteChanged() {
         let _self = this
@@ -38,17 +33,4 @@ export default class Article extends Vue {
             _self.articles = res.articles
         })
     }
-    // mounted () {
-    //     this.greet()
-    //   }
-    
-    //   // computed
-    //   get computedMsg () {
-    //     return 'computed 11'
-    //   }
-    
-    //   // method
-    //   greet () {
-    //     alert('greeting: 22')
-    //   }
 } 

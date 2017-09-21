@@ -1,0 +1,36 @@
+<template lang="jade">
+	section.class-panel.panel.f-spacing.f-spacing-little
+		h4.title CLASS
+		ul
+			li
+				router-link(to="/articles") all
+				span.number {{total}}
+
+			li(v-for="item in classes")
+				router-link(:to="{ path: '/articles', query: {filter: item.name} }") {{item.name}}
+				span.number {{item.articles.length}}
+</template>
+
+<style lang="stylus">
+	.panel
+		padding 20px 0
+		border 1px solid #eee
+		border-width 1px 0
+
+		& + .panel
+			border-width 0 0 1px
+
+	.class-panel
+		ul
+			margin-left 20px
+
+		li
+			list-style disc
+
+		a:active
+			color red
+
+		.number
+			margin-left 5px
+			color #999
+</style>
