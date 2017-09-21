@@ -7,15 +7,7 @@
 </template>
 
 <script>
-	import 'uikit/dist/css/uikit.gradient.min.css'
-	import 'uikit/dist/css/components/notify.gradient.min.css'
-	import 'uikit/dist/css/components/tooltip.gradient.min.css'
-	import 'uikit'
-	import 'uikit/dist/js/components/notify.js'
-	import 'uikit/dist/js/components/tooltip.js'
-	import '../../assets/css/reset.css'
-
- 
+	import '../../assets/uikit.ts'
 	import myNav from '../../components/back/nav.vue'
 
 	export default {

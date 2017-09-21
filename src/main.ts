@@ -1,10 +1,10 @@
 import './class-component-hooks'
+import '@/assets/css/reset.css'
 import Vue from 'vue'
 import { router } from './router'
 import app from './app.vue'
 
-
 new Vue({
-  router,
-  render: h => h(app)
+	router,
+	render: h => h(app)
 }).$mount('#app')

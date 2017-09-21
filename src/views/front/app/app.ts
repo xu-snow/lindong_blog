@@ -2,20 +2,19 @@
  * @Author: zhengxu 
  * @Date: 2017-09-20 14:18:12 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-09-21 14:28:46
+ * @Last Modified time: 2017-09-21 20:49:52
  */
 import Vue from '@/Base'
-import { Component,Watch ,Prop } from 'vue-property-decorator'
+import { Component, Watch, Prop } from 'vue-property-decorator'
 import template from './app.vue'
-import '@/assets/css/reset.css'
 import myNav from '@/components/front/nav'
 
 @Component({
-    mixins:[template],
-    components:{
-        myNav
-    }
+	mixins: [template],
+	components: {
+		myNav
+	}
 })
-export default class App extends Vue{
+export default class App extends Vue {
 
 }

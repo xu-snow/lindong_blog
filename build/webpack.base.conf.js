@@ -19,7 +19,7 @@ module.exports = {
       config.build.assetsPublicPath : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.ts','.js', '.vue', '.json'],
+    extensions: ['.ts', '.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
@@ -27,14 +27,19 @@ module.exports = {
   },
 
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.ts$/,
-        exclude:/node_modules/,  ///node_modules|vue\/src/
+        exclude: /node_modules/, ///node_modules|vue\/src/
         loader: 'awesome-typescript-loader',
         options: {
           appendTsSuffixTo: [/\.vue$/]
         }
+      },
+      {
+        test: /\.ts$/,
+        loader: 'tslint-loader',
+        enforce: 'pre',
+        include: [resolve('src')], //[resolve('src'), resolve('test')],
       },
       // {
       //   test: /\.(js|vue)$/,

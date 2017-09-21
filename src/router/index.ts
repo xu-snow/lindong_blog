@@ -1,0 +1,56 @@
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+Vue.use(VueRouter)
+
+let router = new VueRouter({
+	routes: [
+		{
+			path: '/',
+			component: r => { (require as WebpackRequire).ensure(['../views/front/app'], () => { r(require('../views/front/app')) }) },
+			redirect: 'articles',
+			children: [
+				{ path: 'articles', component: r => { (require as WebpackRequire).ensure(['../views/front/list'], () => { r(require('../views/front/list')) }) } },
+				{ path: 'articles/:id', component: r => { (require as WebpackRequire).ensure(['../views/front/article'], () => { r(require('../views/front/article')) }) } }
+			]
+		},
+		{
+			path: '/admin',
+			component: r => { (require as WebpackRequire).ensure(['../views/back/app.vue'], () => { r(require('../views/back/app.vue')) }) },
+			children: [
+				{ path: 'login', component: r => { (require as WebpackRequire).ensure(['../views/back/login.vue'], () => { r(require('../views/back/login.vue')) }) } },
+				{ path: 'classes', component: r => { (require as WebpackRequire).ensure(['../views/back/classes.vue'], () => { r(require('../views/back/classes.vue')) }) } },
+				{ path: 'articles', component: r => { (require as WebpackRequire).ensure(['../views/back/list.vue'], () => { r(require('../views/back/list.vue')) }) } },
+				{ path: 'articles/create', component: r => { (require as WebpackRequire).ensure(['../views/back/create.vue'], () => { r(require('../views/back/create.vue')) }) } },
+				{ path: 'articles/:id', component: r => { (require as WebpackRequire).ensure(['../views/back/create.vue'], () => { r(require('../views/back/create.vue')) }) } }
+			],
+			redirect: '/admin/articles',
+			beforeEnter(to, from, next) {
+				let temp = Number(to.path === '/admin/login') + '-' + Number(sessionStorage.getItem('isLogin'))
+				switch (temp) {
+					case '1-1':
+						next('/admin/articles')
+						break
+					case '0-0':
+						next('/admin/login')
+						break
+					default:
+						next()
+						break
+				}
+			}
+		},
+		{
+			path: '*',
+			redirect: '/articles'
+		}
+	],
+	scrollBehavior(to, from, savedPosition) {
+		return { x: 0, y: 0 }
+	},
+	mode: 'history'
+})
+
+
+
+export { router }
