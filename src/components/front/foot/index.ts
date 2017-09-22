@@ -9,7 +9,7 @@ import { Component } from 'vue-property-decorator'
 import template from './foot.vue'
 
 @Component({
-	mixins: [template]
+  mixins: [template]
 })
 export default class Foot extends Vue {
 

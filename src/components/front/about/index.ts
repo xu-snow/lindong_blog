@@ -9,7 +9,7 @@ import { Component } from 'vue-property-decorator'
 import template from './about.vue'
 
 @Component({
-	mixins: [template]
+  mixins: [template]
 })
 export default class About extends Vue {
 

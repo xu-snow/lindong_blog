@@ -2,7 +2,7 @@
  * @Author: zhengxu 
  * @Date: 2017-09-21 21:43:43 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-09-21 21:52:09
+ * @Last Modified time: 2017-09-22 19:21:48
  */
 import Vue from '@/Base'
 import { Component, Watch, Prop } from 'vue-property-decorator'
@@ -12,140 +12,133 @@ import { resource, isProduction } from '@/req'
 import { handleRes } from '@/handle'
 
 const reload = (vm, data?) => {
-	vm.status = 1
-	vm.disabled = true
+  vm.status = 1
+  vm.disabled = true
 
-	vm.oldBg = data ? data.bg.name : vm.article.bg.name
-	vm.changeBg = false
-	vm.oldClasses = data ? data.classes : vm.article.classes
-	vm.changeClasses = false
+  vm.oldBg = data ? data.bg.name : vm.article.bg.name
+  vm.changeBg = false
+  vm.oldClasses = data ? data.classes : vm.article.classes
+  vm.changeClasses = false
 }
 
 @Component({
-	mixins: [template],
+  mixins: [template],
 
 })
-export default class App extends Vue {
-	article: { [key: string]: any } = {
-		title: '',
-		digest: '',
-		markdown: '',
-		classes: '',
-		bg: {
-			name: '',
-			ctn: ''
-		}
-	}
-	classes: any = []
-	// control variable
-	status: number = 0 // create or change, change is 1, create is 0, default change
-	disabled: boolean = false
-	oldBg: any = ''
-	oldClasses: any = ''
+export default class Create extends Vue {
+  article: { [key: string]: any } = {
+    title: '',
+    digest: '',
+    markdown: '',
+    classes: '',
+    bg: {
+      name: '',
+      ctn: ''
+    }
+  }
+  classes: any = []
+  // control variable
+  status: number = 0 // create or change, change is 1, create is 0, default change
+  disabled: boolean = false
+  oldBg: any = ''
+  oldClasses: any = ''
 
-	// method
-	submit() {
-		this.status ? this.change() : this.create()
-	}
+  // method
+  submit() {
+    this.status ? this.change() : this.create()
+  }
 
-	create() {
-		let _self = this, data
+  create() {
+    let _self = this, data
 
-		if (!_self.article.bg.name) {
-			UIkit.notify({
-				message: '请添加背景图',
-				status: 'warning',
-				timeout: 1000
-			})
+    if (!_self.article.bg.name) {
+      UIkit.notify({
+        message: '请添加背景图',
+        status: 'warning',
+        timeout: 1000
+      })
 
-			return false
-		}
+      return false
+    }
 
-		// process data
-		data = Object.assign(_self.article, { timestamp: Date.now() })
-		data = { data: JSON.stringify(data) }
+    // process data
+    data = Object.assign(_self.article, { timestamp: Date.now() })
+    data = { data: JSON.stringify(data) }
 
-		resource.articles.put(data).then(res => {
-			let r = handleRes(res, { successMsg: '添加成功' })
+    resource.articles.put(data).then(res => {
+      let r = handleRes(res, { successMsg: '添加成功' })
 
-			if (r) {
+      if (r) {
 
-				_self.$router.push(String(res.result.id))
-				reload(_self)
-			}
-		})
-	}
+        _self.$router.push(String(res.result.id))
+        reload(_self)
+      }
+    })
+  }
 
-	change() {
-		let _self = this, data
+  change() {
+    let _self = this, data
 
-		// process data
-		data = Object.assign({ article: _self.article }, { changeBg: _self.changeBg, changeClasses: _self.changeClasses, oldClasses: _self.oldClasses })
-		data = { data: JSON.stringify(data) }
+    // process data
+    data = Object.assign({ article: _self.article }, { changeBg: _self.changeBg, changeClasses: _self.changeClasses, oldClasses: _self.oldClasses })
+    data = { data: JSON.stringify(data) }
 
-		resource.articles.update(_self.$route.params, data).then(res => {
-			handleRes(res, { successMsg: '修改成功' })
-			reload(_self)
-		})
-	}
+    resource.articles.update(_self.$route.params, data).then(res => {
+      handleRes(res, { successMsg: '修改成功' })
+      reload(_self)
+    })
+  }
 
-	toggle() {
-		this.disabled = !this.disabled
-	}
+  toggle() {
+    this.disabled = !this.disabled
+  }
 
-	uploadImg(e) {
-		let _self = this,
-			_file = e.target.files[0],
-			render = new FileReader()
-		render.onload = function (e) {
-			_self.article.bg.name = _file.name
-			_self.article.bg.ctn = e.target['result']
+  uploadImg(e) {
+    let _self = this,
+      _file = e.target.files[0],
+      render = new FileReader()
+    render.onload = function (e) {
+      _self.article.bg.name = _file.name
+      _self.article.bg.ctn = e.target['result']
 
-		}
-		render.readAsDataURL(_file)
-	}
+    }
+    render.readAsDataURL(_file)
+  }
 
-	// computed
-	get changeBg() {
-		return !(this.article.bg.name === this.oldBg)
-	}
-	get changeClasses() {
-		return !(this.article.classes === this.oldClasses)
-	}
+  // computed
+  get changeBg() {
+    return !(this.article.bg.name === this.oldBg)
+  }
+  get changeClasses() {
+    return !(this.article.classes === this.oldClasses)
+  }
 
-	beforeRouteEnter(to, from, next) {
-		// if from 'create' page, do nothing
-		if (from.path === '/admin/articles/create') {
-			next()
-			return
-		}
-
-		let params = to.params, task: any[] = []
-
-		task.push(resource.classes.get())
-		params.id && task.push(resource.articles.getOne(params))
-
-		co(function* () {
-			let r = yield task,
-				classes = r[0].classes,
-				article
-
-			if (r[1]) {
-				article = r[1].article
-
-				article.classes = article.classes.id
-				article.bg.ctn = (isProduction ? '' : 'http://localhost:3000') + article.bg.ctn
-			}
-			next(vm => {
-				vm.classes = classes
-
-				if (article) {
-					vm.article = article
-					reload(vm, article)
-				}
-			})
-		})
-	}
-
+  beforeRouteEnter(to: Vue.Route, from: Vue.Route, next: Vue.next) {
+    // if from 'create' page, do nothing
+    if (from.path === '/admin/articles/create') {
+      next()
+      return
+    }
+    let params = to.params, task: any[] = []
+    task.push(resource.classes.get())
+    params.id && task.push(resource.articles.getOne(params))
+    co(function* () {
+      let r = yield task,
+        classes = r[0].classes,
+        article
+      if (r[1]) {
+        article = r[1].article
+        article.classes = article.classes.id
+        article.bg.ctn = (isProduction ? '' : 'http://localhost:3000') + article.bg.ctn
+      }
+      next((vm: Create) => {
+        vm.classes = classes
+        if (article) {
+          vm.article = article
+          reload(vm, article)
+        }
+      })
+    })
+  }
 }
 

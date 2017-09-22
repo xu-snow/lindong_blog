@@ -10,10 +10,10 @@ import template from './app.vue'
 import myNav from '@/components/front/nav'
 
 @Component({
-	mixins: [template],
-	components: {
-		myNav
-	}
+  mixins: [template],
+  components: {
+    myNav
+  }
 })
 export default class App extends Vue {
 

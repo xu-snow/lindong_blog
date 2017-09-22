@@ -1,57 +1,57 @@
 import { getUrl } from './url'
 
 let articles: { get, getOne, update, put, delete } = {
-	get: (data = {}) => {
-		return new Promise((resolve, reject) => {
-			$.get(getUrl('articles'), data, res => {
-				resolve(res)
-			}, 'json')
+  get: (data = {}) => {
+    return new Promise((resolve, reject) => {
+      $.get(getUrl('articles'), data, res => {
+        resolve(res)
+      }, 'json')
 
-		})
-	},
-	getOne: params => {
-		return new Promise((resolve, reject) => {
+    })
+  },
+  getOne: params => {
+    return new Promise((resolve, reject) => {
 
-			$.get(getUrl('articlesOne', params), res => {
-				resolve(res)
-			}, 'json')
+      $.get(getUrl('articlesOne', params), res => {
+        resolve(res)
+      }, 'json')
 
-		})
-	},
-	update: (params, data) => {
-		return new Promise((resolve, reject) => {
+    })
+  },
+  update: (params, data) => {
+    return new Promise((resolve, reject) => {
 
-			$.post(getUrl('articlesOne', params), data, res => {
-				resolve(res)
-			}, 'json')
+      $.post(getUrl('articlesOne', params), data, res => {
+        resolve(res)
+      }, 'json')
 
-		})
-	},
-	put: data => {
-		return new Promise((resolve, reject) => {
+    })
+  },
+  put: data => {
+    return new Promise((resolve, reject) => {
 
-			$.ajax({
-				url: getUrl('articles'),
-				type: 'put',
-				data: data,
-				dataType: 'json',
-				success: res => { resolve(res) }
-			})
+      $.ajax({
+        url: getUrl('articles'),
+        type: 'put',
+        data: data,
+        dataType: 'json',
+        success: res => { resolve(res) }
+      })
 
-		})
-	},
-	delete: (params, data) => {
-		return new Promise((resolve, reject) => {
-			$.ajax({
-				url: getUrl('articlesOne', params),
-				type: 'delete',
-				data: data,
-				dataType: 'json',
-				success: res => { resolve(res) }
-			})
+    })
+  },
+  delete: (params, data) => {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url: getUrl('articlesOne', params),
+        type: 'delete',
+        data: data,
+        dataType: 'json',
+        success: res => { resolve(res) }
+      })
 
-		})
-	}
+    })
+  }
 }
 
 

@@ -4,8 +4,8 @@ import api from './api'
 import { isProduction } from './url'
 
 let resource = {
-	articles: articles,
-	classes: classes
+  articles: articles,
+  classes: classes
 }
 
 export { resource, api, isProduction }
