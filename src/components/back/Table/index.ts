@@ -35,7 +35,8 @@ export default class Table extends Vue {
     })
   }
   renderHtml($data, attr) {
-    return '<a href="' + attr.express + '" target="_blank">' + $data.title + '</a>'
+    console.log(attr)
+    return '<a href="' + attr.express + $data.id + '" target="_blank">' + $data.title + '</a>'
     // return '<a href="' + eval(attr.express) + '" target="_blank">' + $data.title + '</a>'
   }
   untie(data, attr) {

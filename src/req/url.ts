@@ -11,7 +11,7 @@ const urlMap = {
 // util method
 // replace url-template to params
 
-const getUrl = (name: string, params: { [key: string]: string } = {}) => {
+const getUrl = (name: string, params: { [key: string]: string } = {}): string => {
   let url = urlMap[name]
   url = url.replace(/:(\w+)/g, (match, key) => {
     return params[key]

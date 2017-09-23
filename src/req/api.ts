@@ -1,5 +1,7 @@
 import { getUrl } from './url'
 
+import axios from 'axios'
+
 let api: { login } = {
   login: data => {
     return new Promise((resolve, reject) => {
