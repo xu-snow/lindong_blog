@@ -1,9 +1,39 @@
 import { getUrl } from './url'
+import axios, { AxiosPromise } from 'axios'
 
-let classes: { get, update, delete, put } = {
+interface ClassesInterface {
+  get(params?: { [key: string]: string }): AxiosPromise
+  update(params: { [key: string]: string }, data: Object): AxiosPromise
+  put(data: Object): AxiosPromise
+  delete(params: { [key: string]: string }, data: Object): AxiosPromise
+}
+let classes: ClassesInterface = {
+  get: (data = {}) => {
+    return axios.get(getUrl('classes'), {
+      params: data
+    })
+  },
+  update: (params, data) => {
+    return axios.post(getUrl('classesOne', params), {
+      data: data,
+    })
+  },
+  put: data => {
+    return axios.put(getUrl('classes'), {
+      data: data,
+    })
+  },
+  delete: (params, data) => {
+    return axios.delete(getUrl('classesOne', params), {
+      data: data,
+    })
+  }
+}
+
+
+let classes1: { get, update, delete, put } = {
   get: () => {
     return new Promise((resolve, reject) => {
-
       $.get(getUrl('classes'), res => {
         resolve(res)
       }, 'json')

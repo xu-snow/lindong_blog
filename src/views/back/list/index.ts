@@ -2,14 +2,14 @@
  * @Author: zhengxu 
  * @Date: 2017-09-22 10:09:16 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-09-23 18:06:27
+ * @Last Modified time: 2017-09-25 00:22:27
  */
 import Vue from '@/Base'
 import { Component, Watch } from 'vue-property-decorator'
 import template from './list.vue'
 import articleList from '@/components/back/table'
 import { resource, api } from '@/req'
-import { handleRes, fetchItem } from '@/handle'
+import { handleRes, fetchItem, parseJson } from '@/handle'
 
 @Component({
   mixins: [template],
@@ -51,17 +51,26 @@ export default class List extends Vue {
   beforeRouteEnter(to: Vue.Route, from: Vue.Route, next: Vue.next) {
     // !
     let temp
-    resource.classes.get()
-      .then(res => {
-        temp = res.classes
-        return resource.articles.get(to.query).then(json => json.data)
-      })
+
+    Promise.all([resource.classes.get().then(parseJson), resource.articles.get(to.query).then(parseJson)])
       .then(res => {
         next((vm: List) => {
-          vm.classes = temp
-          vm.articles.data = res.articles
+          vm.classes = res[0].classes
+          vm.articles.data = res[1].articles
         })
       })
+      .catch(e => console.log(e))
+    // resource.classes.get()
+    //   .then(res => {
+    //     temp = res.classes
+    //     return resource.articles.get(to.query).then(json => json.data)
+    //   })
+    //   .then(res => {
+    //     next((vm: List) => {
+    //       vm.classes = temp
+    //       vm.articles.data = res.articles
+    //     })
+    //   })
   }
 
 

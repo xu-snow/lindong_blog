@@ -2,14 +2,14 @@
  * @Author: zhengxu 
  * @Date: 2017-09-21 21:43:43 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-09-23 17:52:50
+ * @Last Modified time: 2017-09-25 00:25:35
  */
 import Vue from '@/Base'
 import { Component, Watch, Prop } from 'vue-property-decorator'
 import template from './create.vue'
 import co from 'co'
 import { resource, isProduction } from '@/req'
-import { handleRes, fetchItem } from '@/handle'
+import { handleRes, fetchItem ,parseJson} from '@/handle'
 
 const reload = (vm, data?) => {
   vm.status = 1

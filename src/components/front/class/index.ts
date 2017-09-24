@@ -8,6 +8,7 @@ import Vue from '@/Base'
 import { Component } from 'vue-property-decorator'
 import template from './class.vue'
 import { resource } from '@/req'
+import { fetchItem } from '@/handle'
 
 @Component({
   mixins: [template]
@@ -15,7 +16,10 @@ import { resource } from '@/req'
 export default class Class extends Vue {
   classes: any[] = []
   created() {
-    resource.classes.get().then(res => {
+    // resource.classes.get().then(res => {
+    //   this.classes = res.classes
+    // })
+    fetchItem(resource.classes.get, undefined, (res) => {
       this.classes = res.classes
     })
   }

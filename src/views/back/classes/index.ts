@@ -5,11 +5,12 @@
  * @Last Modified time: 2017-09-22 19:28:53
  */
 import Vue from '@/Base'
-import { Component, Watch, Prop } from 'vue-property-decorator'
+import { Component } from 'vue-property-decorator'
 import template from './classes.vue'
 import classList from '@/components/back/table'
 import { resource } from '@/req'
-import { handleRes } from '@/handle'
+import { handleRes, fetchItem } from '@/handle'
+
 
 @Component({
   mixins: [template],
@@ -34,12 +35,21 @@ export default class Classes extends Vue {
         })
         return
       }
-      resource.classes.put({ name: value }).then(res => {
+      fetchItem(resource.classes.put, { data: { name: value } }, res => {
         let r = handleRes(res)
         if (r) {
           _self.classes.data.push(res.result)
         }
       })
+
+      // resource.classes.put({ name: value }).then(res => {
+      //   let r = handleRes(res)
+      //   if (r) {
+      //     _self.classes.data.push(res.result)
+      //   }
+      // })
+
+
     })
   }
   change(item) {
@@ -47,12 +57,19 @@ export default class Classes extends Vue {
       index = item._index  // class索引
     UIkit.modal.prompt('请输入新分类名称', oldName, value => {
       if (oldName !== value) {
-        resource.classes.update({ id: item.id }, { name: value }).then(res => {
+        fetchItem(resource.classes.update, { params: { id: item.id }, data: { name: value } }, res => {
           let r = handleRes(res, { successMsg: '修改成功' })
           if (r) {
             item.name = value
           }
         })
+
+        // resource.classes.update({ id: item.id }, { name: value }).then(res => {
+        //   let r = handleRes(res, { successMsg: '修改成功' })
+        //   if (r) {
+        //     item.name = value
+        //   }
+        // })
       }
     })
   }
@@ -63,11 +80,18 @@ export default class Classes extends Vue {
       timeout: 1000
     })
   }
+
   beforeRouteEnter(to: Vue.Route, from: Vue.Route, next: Vue.next) {
-    resource.classes.get().then(res => {
+    fetchItem(resource.classes.get, undefined, res => {
       next((vm: Classes) => {
         vm.classes.data = res.classes
       })
     })
+
+    // resource.classes.get().then(res => {
+    //   next((vm: Classes) => {
+    //     vm.classes.data = res.classes
+    //   })
+    // })
   }
 }
