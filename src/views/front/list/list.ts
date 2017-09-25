@@ -2,7 +2,7 @@
  * @Author: zhengxu 
  * @Date: 2017-09-21 15:44:41 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-09-23 18:14:23
+ * @Last Modified time: 2017-09-25 19:55:08
  */
 import Vue from '@/Base'
 import { Component, Watch, Prop } from 'vue-property-decorator'
@@ -32,12 +32,6 @@ export default class List extends Vue {
         vm.articles = res.articles
       })
     })
-
-    // resource.articles.get(to.query).then(res => {
-    //   next((vm: List) => {
-    //     vm.articles = res.articles
-    //   })
-    // })
   }
 
 
@@ -48,8 +42,5 @@ export default class List extends Vue {
     fetchItem(resource.articles.get, { params: _self.$route.query }, (res) => {
       _self.articles = res.articles
     })
-    // resource.articles.get(_self.$route.query).then(res => {
-    //   _self.articles = res.articles
-    // })
   }
 } 

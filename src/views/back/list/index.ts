@@ -2,13 +2,13 @@
  * @Author: zhengxu 
  * @Date: 2017-09-22 10:09:16 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-09-25 00:22:27
+ * @Last Modified time: 2017-09-25 22:20:09
  */
 import Vue from '@/Base'
 import { Component, Watch } from 'vue-property-decorator'
 import template from './list.vue'
 import articleList from '@/components/back/table'
-import { resource, api } from '@/req'
+import { resource } from '@/req'
 import { handleRes, fetchItem, parseJson } from '@/handle'
 
 @Component({
@@ -38,20 +38,17 @@ export default class List extends Vue {
     this.$router.push({ path: '/admin/articles/' + item.id })
   }
   remove(item) {
+    debugger
     let params = { id: item.id },
       data = { data: JSON.stringify({ classes: item.classes.id }) }
-    fetchItem(resource.articles.delete, { data: data }, (res) => {
+    fetchItem(resource.articles.delete, { params: params, data: data }, (res) => {
       handleRes(res)
     })
-    // resource.articles.delete(params, data).then(res => {
-    //   handleRes(res)
-    // })
+
   }
 
   beforeRouteEnter(to: Vue.Route, from: Vue.Route, next: Vue.next) {
-    // !
     let temp
-
     Promise.all([resource.classes.get().then(parseJson), resource.articles.get(to.query).then(parseJson)])
       .then(res => {
         next((vm: List) => {
@@ -60,30 +57,23 @@ export default class List extends Vue {
         })
       })
       .catch(e => console.log(e))
-    // resource.classes.get()
-    //   .then(res => {
-    //     temp = res.classes
-    //     return resource.articles.get(to.query).then(json => json.data)
-    //   })
-    //   .then(res => {
-    //     next((vm: List) => {
-    //       vm.classes = temp
-    //       vm.articles.data = res.articles
-    //     })
-    //   })
+  }
+
+  beforeRouteUpdate(to: Vue.Route, from: Vue.Route, next: Vue.next) {
+    fetchItem(resource.articles.get, { data: to.query }, (res) => {
+      next()
+      this.articles.data = res.articles
+    })
+    
   }
 
 
   // todo 用beforeRouteUpdate 看行不行
-  @Watch('$route')
-  onRouteChange() {
-    fetchItem(resource.articles.get, { params: this.$route.query }, (res) => {
-      this.articles.data = res.articles
-    })
-    // resource.articles.get(this.$route.query)
-    //   .then(res => {
-    //     this.articles.data = res.articles
-    //   })
-  }
+  // @Watch('$route')
+  // onRouteChange() {
+  //   fetchItem(resource.articles.get, { params: this.$route.query }, (res) => {
+  //     this.articles.data = res.articles
+  //   })
+  // }
 
 }

@@ -1,6 +1,6 @@
 import articles from './articles'
 import classes from './classes'
-import api from './api'
+import authorisation from './authorisation'
 import { isProduction } from './url'
 
 let resource = {
@@ -8,4 +8,4 @@ let resource = {
   classes: classes
 }
 
-export { resource, api, isProduction }
+export { resource, authorisation, isProduction }

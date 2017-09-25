@@ -14,14 +14,10 @@ let classes: ClassesInterface = {
     })
   },
   update: (params, data) => {
-    return axios.post(getUrl('classesOne', params), {
-      data: data,
-    })
+    return axios.post(getUrl('classesOne', params), data)
   },
   put: data => {
-    return axios.put(getUrl('classes'), {
-      data: data,
-    })
+    return axios.put(getUrl('classes'), data)
   },
   delete: (params, data) => {
     return axios.delete(getUrl('classesOne', params), {

@@ -3,26 +3,27 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+
 let router = new VueRouter({
   routes: [
     {
       path: '/',
-      component: r => { (require as WebpackRequire).ensure(['../views/front/app'], () => { r(require('../views/front/app')) }) },
+      component: () => import('../views/front/app'),
       redirect: 'articles',
       children: [
-        { path: 'articles', component: r => { (require as WebpackRequire).ensure(['../views/front/list'], () => { r(require('../views/front/list')) }) } },
-        { path: 'articles/:id', component: r => { (require as WebpackRequire).ensure(['../views/front/article'], () => { r(require('../views/front/article')) }) } }
+        { path: 'articles', component: () => import('../views/front/list') },
+        { path: 'articles/:id', component: () => import('../views/front/article') }
       ]
     },
     {
       path: '/admin',
-      component: r => { (require as WebpackRequire).ensure(['../views/back/app'], () => { r(require('../views/back/app')) }) },
+      component: () => import('../views/back/app'),
       children: [
-        { path: 'login', component: r => { (require as WebpackRequire).ensure(['../views/back/login'], () => { r(require('../views/back/login')) }) } },
-        { path: 'classes', component: r => { (require as WebpackRequire).ensure(['../views/back/classes'], () => { r(require('../views/back/classes')) }) } },
-        { path: 'articles', component: r => { (require as WebpackRequire).ensure(['../views/back/list'], () => { r(require('../views/back/list')) }) } },
-        { path: 'articles/create', component: r => { (require as WebpackRequire).ensure(['../views/back/create'], () => { r(require('../views/back/create')) }) } },
-        { path: 'articles/:id', component: r => { (require as WebpackRequire).ensure(['../views/back/create'], () => { r(require('../views/back/create')) }) } }
+        { path: 'login', component: () => import('../views/back/login') },
+        { path: 'classes', component: () => import('../views/back/classes') },
+        { path: 'articles', component: () => import('../views/back/list') },
+        { path: 'articles/create', component: () => import('../views/back/create') },
+        { path: 'articles/:id', component: () => import('../views/back/create') }
       ],
       redirect: '/admin/articles',
       beforeEnter(to, from, next) {
@@ -50,7 +51,5 @@ let router = new VueRouter({
   },
   mode: 'history'
 })
-
-
 
 export { router }

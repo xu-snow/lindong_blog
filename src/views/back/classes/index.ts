@@ -2,7 +2,7 @@
  * @Author: zhengxu 
  * @Date: 2017-09-20 14:18:12 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-09-22 19:28:53
+ * @Last Modified time: 2017-09-25 19:54:41
  */
 import Vue from '@/Base'
 import { Component } from 'vue-property-decorator'
@@ -41,15 +41,6 @@ export default class Classes extends Vue {
           _self.classes.data.push(res.result)
         }
       })
-
-      // resource.classes.put({ name: value }).then(res => {
-      //   let r = handleRes(res)
-      //   if (r) {
-      //     _self.classes.data.push(res.result)
-      //   }
-      // })
-
-
     })
   }
   change(item) {
@@ -63,13 +54,6 @@ export default class Classes extends Vue {
             item.name = value
           }
         })
-
-        // resource.classes.update({ id: item.id }, { name: value }).then(res => {
-        //   let r = handleRes(res, { successMsg: '修改成功' })
-        //   if (r) {
-        //     item.name = value
-        //   }
-        // })
       }
     })
   }
@@ -87,11 +71,5 @@ export default class Classes extends Vue {
         vm.classes.data = res.classes
       })
     })
-
-    // resource.classes.get().then(res => {
-    //   next((vm: Classes) => {
-    //     vm.classes.data = res.classes
-    //   })
-    // })
   }
 }

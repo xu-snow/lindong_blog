@@ -2,14 +2,13 @@
  * @Author: zhengxu 
  * @Date: 2017-09-21 21:43:43 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-09-25 00:25:35
+ * @Last Modified time: 2017-09-25 19:54:20
  */
 import Vue from '@/Base'
 import { Component, Watch, Prop } from 'vue-property-decorator'
 import template from './create.vue'
-import co from 'co'
 import { resource, isProduction } from '@/req'
-import { handleRes, fetchItem ,parseJson} from '@/handle'
+import { handleRes, fetchItem, parseJson } from '@/handle'
 
 const reload = (vm, data?) => {
   vm.status = 1
@@ -71,29 +70,13 @@ export default class Create extends Vue {
         reload(_self)
       }
     })
-
-    // resource.articles.put(data).then(res => {
-    //   let r = handleRes(res, { successMsg: '添加成功' })
-
-    //   if (r) {
-
-    //     _self.$router.push(String(res.result.id))
-    //     reload(_self)
-    //   }
-    // })
   }
 
   change() {
     let _self = this, data
-
     // process data
     data = Object.assign({ article: _self.article }, { changeBg: _self.changeBg, changeClasses: _self.changeClasses, oldClasses: _self.oldClasses })
     data = { data: JSON.stringify(data) }
-
-    // resource.articles.update(_self.$route.params, data).then(res => {
-    //   handleRes(res, { successMsg: '修改成功' })
-    //   reload(_self)
-    // })
     fetchItem(resource.articles.update, { params: _self.$route.params, data: data }, res => {
       handleRes(res, { successMsg: '修改成功' })
       reload(_self)
@@ -130,27 +113,28 @@ export default class Create extends Vue {
       next()
       return
     }
-    // ! 还没改
     let params = to.params, task: any[] = []
-    task.push(resource.classes.get())
-    params.id && task.push(resource.articles.getOne(params).then(json => json.data))
-    co(function* () {
-      let r = yield task,
-        classes = r[0].classes,
-        article
-      if (r[1]) {
-        article = r[1].article
-        article.classes = article.classes.id
-        article.bg.ctn = (isProduction ? '' : 'http://localhost:3000') + article.bg.ctn
-      }
-      next((vm: Create) => {
-        vm.classes = classes
-        if (article) {
-          vm.article = article
-          reload(vm, article)
+    task.push(resource.classes.get().then(parseJson))
+    params.id && task.push(resource.articles.getOne(params).then(parseJson))
+
+    Promise.all(task)
+      .then(res => {
+        let classes = res[0].classes,
+          article
+        if (res[1]) {
+          article = res[1].article
+          article.classes = article.classes.id
+          article.bg.ctn = (isProduction ? '' : 'http://localhost:3000') + article.bg.ctn
         }
+        next((vm: Create) => {
+          vm.classes = classes
+          if (article) {
+            vm.article = article
+            reload(vm, article)
+          }
+        })
       })
-    })
+      .catch(e => console.log(e))
   }
 }
 

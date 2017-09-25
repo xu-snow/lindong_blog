@@ -2,7 +2,7 @@
  * @Author: zhengxu 
  * @Date: 2017-09-22 14:36:05 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-09-22 15:19:28
+ * @Last Modified time: 2017-09-25 19:57:29
  */
 import Vue from '@/Base'
 import { Component, Prop } from 'vue-property-decorator'
@@ -35,7 +35,6 @@ export default class Table extends Vue {
     })
   }
   renderHtml($data, attr) {
-    console.log(attr)
     return '<a href="' + attr.express + $data.id + '" target="_blank">' + $data.title + '</a>'
     // return '<a href="' + eval(attr.express) + '" target="_blank">' + $data.title + '</a>'
   }

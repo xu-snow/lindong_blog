@@ -2,7 +2,7 @@
  * @Author: zhengxu 
  * @Date: 2017-09-21 15:44:53 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-09-23 18:07:46
+ * @Last Modified time: 2017-09-25 19:54:56
  */
 import Vue from '@/Base'
 import { Component, Watch, Prop } from 'vue-property-decorator'
@@ -33,13 +33,5 @@ export default class Article extends Vue {
         vm.article = res.article
       })
     })
-
-
-    // resource.articles.getOne(to.params)
-    // .then((res: any) => {
-    //   next((vm: any) => {
-    //     vm.article = res.article
-    //   })
-    // })
   }
 }
