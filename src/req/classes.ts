@@ -1,6 +1,7 @@
 import { getUrl } from './url'
 import axios, { AxiosPromise } from 'axios'
 
+// server should need header('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With')
 interface ClassesInterface {
   get(params?: { [key: string]: string }): AxiosPromise
   update(params: { [key: string]: string }, data: Object): AxiosPromise
