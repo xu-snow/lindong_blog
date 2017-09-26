@@ -10,7 +10,6 @@ function resolve(dir) {
 module.exports = {
   entry: {
     app: './src/main'
-    // vendor: ['jquery', './src/req/index.js']
   },
   output: {
     path: config.build.assetsRoot,

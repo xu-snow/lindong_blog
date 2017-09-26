@@ -1,9 +1,10 @@
 <template lang="jade">
-	nav.nav.f-flex
-		h6.f-flex-item-1 LinDong Blog
-		ul.text
-			li
-				router-link(to="/articles") HOME
+	mu-flexbox.nav.f-flex(:gutter="0")
+		mu-flexbox-item.f-flex-item-1 LinDong Blog
+		div
+			mu-tabs(value="'home'").text
+				mu-tab(value="home" title="HOME" href="/articles")
+				mu-tab(value="about" title="ABOUT" href="/ddd")
 </template>
 
 <style lang="stylus">
@@ -21,7 +22,7 @@
 			display inline
 
 		a
-			margin 0 20px
+			padding  0 20px
 			color inherit
 			font-size 14px
 			font-weight bold

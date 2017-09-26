@@ -5,6 +5,9 @@
     /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */
     "module": "esnext",
     /* Specify module code generation: 'none', commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
+    "moduleResolution": "node",
+    /* TypeScript 不要处理 ES 模块引入语句 (译注：import .. from ..)。这样 webpack 2 就可以充分利用其基于 ES 模块的 tree-shaking*/
+    /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
     "lib": ["dom","es5" ,"es2015","es2015.promise"],
     /* Specify library files to be included in the compilation:  */
     "allowJs": true,
@@ -43,9 +46,6 @@
     // "noFallthroughCasesInSwitch": true,    /* Report errors for fallthrough cases in switch statement. */
 
     /* Module Resolution Options */
-    "moduleResolution": "node",
-    /* TypeScript 不要处理 ES 模块引入语句 (译注：import .. from ..)。这样 webpack 2 就可以充分利用其基于 ES 模块的 tree-shaking*/
-    /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
     "baseUrl": "./",
     /* Base directory to resolve non-absolute module names. */
     "paths": {

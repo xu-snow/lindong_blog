@@ -1,14 +1,23 @@
 <template lang="jade">
 	section.class-panel.panel.f-spacing.f-spacing-little
 		h4.title CLASS
-		ul
-			li
+		div
+			mu-chip
 				router-link(to="/articles") all
 				span.number {{total}}
-
-			li(v-for="item in classes")
-				router-link(:to="{ path: '/articles', query: {filter: item.name} }") {{item.name}}
+			
+			mu-chip(v-for="item in classes" ,:key="item.id")
+			
+				router-link( :to="{ path: '/articles', query: {filter: item.name} }") {{item.name}}
 				span.number {{item.articles.length}}
+		//- ul
+		//- 	li
+		//- 		router-link(to="/articles") all
+		//- 		span.number {{total}}
+
+		//- 	li(v-for="item in classes")
+		//- 		router-link(:to="{ path: '/articles', query: {filter: item.name} }") {{item.name}}
+		//- 		span.number {{item.articles.length}}
 </template>
 
 <style lang="stylus">
