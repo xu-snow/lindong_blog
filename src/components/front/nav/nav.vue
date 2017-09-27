@@ -2,7 +2,7 @@
 	mu-flexbox.nav.f-flex(:gutter="0")
 		mu-flexbox-item.f-flex-item-1 LinDong Blog
 		div
-			mu-tabs(value="'home'").text
+			mu-tabs(value="home").text
 				mu-tab(value="home" title="HOME" href="/articles")
 				mu-tab(value="about" title="ABOUT" href="/ddd")
 </template>
