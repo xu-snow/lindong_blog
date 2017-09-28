@@ -1,9 +1,11 @@
 <template lang="jade">
 	section.about-panel.panel.f-spacing.f-spacing-little
+		mu-divider
 		h4.title ABOUT
 		img.avatar(src="../../../assets/images/avatar.jpg")
 		p.intro 世界在我面前臣服，敌人在我眼前倒下
 		a.github(href="https://github.com/xu-snow")
+		mu-divider
 </template>
 
 <style lang="stylus">

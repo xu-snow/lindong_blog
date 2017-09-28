@@ -1,45 +1,24 @@
 <template lang="jade">
 	section.class-panel.panel.f-spacing.f-spacing-little
+		mu-divider
 		h4.title CLASS
-		div
-			mu-chip
-				router-link(to="/articles") all
+		div.class-list
+			mu-chip(:backgroundColor="$route.query.filter?grey200:blue100" @click="routerPush()" ) all
 				span.number {{total}}
-			
-			mu-chip(v-for="item in classes" ,:key="item.id")
-			
-				router-link( :to="{ path: '/articles', query: {filter: item.name} }") {{item.name}}
-				span.number {{item.articles.length}}
-		//- ul
-		//- 	li
-		//- 		router-link(to="/articles") all
-		//- 		span.number {{total}}
 
-		//- 	li(v-for="item in classes")
-		//- 		router-link(:to="{ path: '/articles', query: {filter: item.name} }") {{item.name}}
-		//- 		span.number {{item.articles.length}}
+			mu-chip(:backgroundColor="$route.query.filter===item.name?blue100:grey200" , v-for="item in classes" ,:key="item.id", @click="routerPush(item.name)") {{item.name}}
+				span.number {{item.articles.length}}
 </template>
 
 <style lang="stylus">
-	.panel
-		padding 20px 0
-		border 1px solid #eee
-		border-width 1px 0
-
-		& + .panel
-			border-width 0 0 1px
-
 	.class-panel
-		ul
-			margin-left 20px
+		.class-list
+			padding-bottom 20px
 
-		li
-			list-style disc
-
-		a:active
-			color red
-
+		.mu-chip
+			margin 0 5px 5px 0
+		
 		.number
 			margin-left 5px
-			color #999
+			color #9e9e9e
 </style>

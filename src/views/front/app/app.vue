@@ -15,11 +15,11 @@
 		position: relative
 	}
 	.g-sd{
-		width:260px;
+		width:300px;
 		padding-left: 15px
 	}
 	.g-mn{
-		padding-right:15px
+		padding:0 20px;
 	}
 	@media (max-width:769px){
 		.g-sd{

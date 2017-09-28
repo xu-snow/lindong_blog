@@ -15,10 +15,18 @@ import { fetchItem } from '@/handle'
 })
 export default class Class extends Vue {
   classes: any[] = []
+  blue100: string = 'blue100'
+  grey200: string = 'grey200'
   created() {
     fetchItem(resource.classes.get, undefined, (res) => {
       this.classes = res.classes
     })
+  }
+  routerPush(value) {
+    if (value)
+      this.$router.push({ path: '/articles', query: { filter: value } })
+    else
+      this.$router.push('/articles')
   }
   get total() {
     let total = 0

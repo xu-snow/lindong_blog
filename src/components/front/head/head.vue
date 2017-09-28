@@ -24,11 +24,13 @@
 		.title
 			font-size 60px
 			font-weight bold
+			margin 0px
 			line-height 1.2
 
 		.descript
 			font-size 18px
-
+			margin 0px
+			
 		&-1
 			display flex
 

@@ -3,8 +3,10 @@
 		mu-flexbox-item.f-flex-item-1 LinDong Blog
 		div
 			mu-tabs(value="home").text
-				mu-tab(value="home" title="HOME" href="/articles")
-				mu-tab(value="about" title="ABOUT" href="/ddd")
+				//- to会变成router-link
+				mu-tab(value="home" title="HOME" to="/articles")
+				mu-tab(value="about" title="ABOUT" to="/ddd")
+				
 </template>
 
 <style lang="stylus">
