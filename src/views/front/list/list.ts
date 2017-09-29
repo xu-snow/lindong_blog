@@ -2,7 +2,7 @@
  * @Author: zhengxu 
  * @Date: 2017-09-21 15:44:41 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-09-25 19:55:08
+ * @Last Modified time: 2017-09-29 21:01:04
  */
 import Vue from '@/Base'
 import { Component, Watch, Prop } from 'vue-property-decorator'
@@ -36,11 +36,19 @@ export default class List extends Vue {
 
 
   // watch
-  @Watch('$route')
-  onRouteChanged() {
-    let _self = this
-    fetchItem(resource.articles.get, { params: _self.$route.query }, (res) => {
-      _self.articles = res.articles
+  // @Watch('$route')
+  // onRouteChanged() {
+  //   let _self = this
+    
+  //   fetchItem(resource.articles.get, { data: _self.$route.query }, (res) => {
+  //     _self.articles = res.articles
+  //   })
+  // }
+
+  beforeRouteUpdate(to: Vue.Route, from: Vue.Route, next: Vue.next) {
+    fetchItem(resource.articles.get, { data: to.query }, (res) => {
+      next()
+      this.articles = res.articles
     })
   }
 } 

@@ -2,7 +2,7 @@
  * @Author: zhengxu 
  * @Date: 2017-09-21 15:48:57 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-09-25 19:55:37
+ * @Last Modified time: 2017-09-29 11:34:45
  */
 import Vue from '@/Base'
 import { Component } from 'vue-property-decorator'
@@ -15,8 +15,7 @@ import { fetchItem } from '@/handle'
 })
 export default class Class extends Vue {
   classes: any[] = []
-  blue100: string = 'blue100'
-  grey200: string = 'grey200'
+
   created() {
     fetchItem(resource.classes.get, undefined, (res) => {
       this.classes = res.classes

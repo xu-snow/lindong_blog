@@ -1,11 +1,11 @@
 <template lang="jade">
-	mu-flexbox.nav.f-flex(:gutter="0")
-		mu-flexbox-item.f-flex-item-1 LinDong Blog
+	mu-flexbox.nav(:gutter="0")
+		mu-flexbox-item LinDong Blog
 		div
 			mu-tabs(value="home").text
 				//- to会变成router-link
 				mu-tab(value="home" title="HOME" to="/articles")
-				mu-tab(value="about" title="ABOUT" to="/ddd")
+				mu-tab(value="about" title="ABOUT" to="/about")
 				
 </template>
 

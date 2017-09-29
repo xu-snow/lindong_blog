@@ -1,12 +1,12 @@
 <template lang="jade">
-	section.class-panel.panel.f-spacing.f-spacing-little
+	section.class-panel
 		mu-divider
 		h4.title CLASS
 		div.class-list
-			mu-chip(:backgroundColor="$route.query.filter?grey200:blue100" @click="routerPush()" ) all
+			mu-chip(:color="$route.query.filter?'':'teal500'" @click="routerPush()" ) all
 				span.number {{total}}
 
-			mu-chip(:backgroundColor="$route.query.filter===item.name?blue100:grey200" , v-for="item in classes" ,:key="item.id", @click="routerPush(item.name)") {{item.name}}
+			mu-chip(:color="$route.query.filter===item.name?'teal500':''" , v-for="item in classes" ,:key="item.id", @click="routerPush(item.name)") {{item.name}}
 				span.number {{item.articles.length}}
 </template>
 

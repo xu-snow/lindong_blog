@@ -1,10 +1,12 @@
 <template lang="jade">
-	section.about-panel.panel.f-spacing.f-spacing-little
+	section.about-panel
 		mu-divider
 		h4.title ABOUT
 		img.avatar(src="../../../assets/images/avatar.jpg")
 		p.intro 世界在我面前臣服，敌人在我眼前倒下
-		a.github(href="https://github.com/xu-snow")
+		div.web-link
+			mu-icon-button(icon=":fa fa-github" tooltip="github",  tooltipPosition="top-center", href="https://github.com/xu-snow")
+			mu-icon-button(icon=":fa fa-twitter" tooltip="twitter",  tooltipPosition="top-center" href="https://twitter.com/lindongxuer")
 		mu-divider
 </template>
 
@@ -19,13 +21,10 @@
 		.intro
 			color #666
 			font-size 14px
-
-		.github
-			display inline-block
-			width 30px
-			height 30px
-			background url('../../../assets/images/github.png') no-repeat
-
-			&:hover
-				background-position -30px 0
+		.web-link
+			.mu-icon-button
+				width 60px
+				height 60px
+			.mu-icon
+				font-size 36px
 </style>
