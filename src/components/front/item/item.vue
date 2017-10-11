@@ -14,4 +14,9 @@
 			span.date {{item.date}} | 
 			| 分类于 
 			router-link(:to="{ path: '/articles', query: {filter: item.classes.name} }") {{item.classes.name}}
+
+		p.digest(v-html="preView")
+		
+		mu-divider
+	
 </template>
