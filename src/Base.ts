@@ -20,14 +20,6 @@ declare namespace Base {
   type Route = R.Route
   type next = (to?: R.RawLocation | false | ((vm: Vue) => any) | void) => void
 }
-// namespace Base {
-//   Route: R.Route,
-//   next: (to?: R.RawLocation | false | ((vm: Vue) => any) | void) => void
-//   beforeRouteEnter(
-//     to: R.Route,
-//     from: R.Route,
-//     next: (to?: R.RawLocation | false | ((vm: Vue) => any) | void) => void
-//   ): void
-// }
+
 export default Base
 

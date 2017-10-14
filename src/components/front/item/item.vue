@@ -16,7 +16,6 @@
 			router-link(:to="{ path: '/articles', query: {filter: item.classes.name} }") {{item.classes.name}}
 
 		p.digest(v-html="preView")
-		
 		mu-divider
 	
 </template>

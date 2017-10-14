@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 
-let router = new VueRouter({
+const router = new VueRouter({
   routes: [
     {
       path: '/',
@@ -16,10 +16,15 @@ let router = new VueRouter({
       ]
     },
     {
+      path: '/register',
+      component: () => import('../views/register/login')
+    },
+
+    {
       path: '/admin',
       component: () => import('../views/back/app'),
       children: [
-        { path: 'login', component: () => import('../views/back/login') },
+        { path: 'login', component: () => import('../views/back/login') }, // ../views/back/login
         { path: 'classes', component: () => import('../views/back/classes') },
         { path: 'articles', component: () => import('../views/back/list') },
         { path: 'articles/create', component: () => import('../views/back/create') },

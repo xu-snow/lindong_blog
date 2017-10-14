@@ -3,26 +3,26 @@ import axios, { AxiosPromise } from 'axios'
 
 // server should need header('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With')
 interface ClassesInterface {
-  get(params?: { [key: string]: string }): AxiosPromise
-  update(params: { [key: string]: string }, data: Object): AxiosPromise
-  put(data: Object): AxiosPromise
-  delete(params: { [key: string]: string }, data: Object): AxiosPromise
+  get(reqUrl?: UrlConfig): AxiosPromise
+  update(reqUrl: UrlConfig): AxiosPromise
+  put(reqUrl: UrlConfig): AxiosPromise
+  delete(reqUrl: UrlConfig): AxiosPromise
 }
 let classes: ClassesInterface = {
-  get: (data = {}) => {
+  get: reqUrl => {
     return axios.get(getUrl('classes'), {
-      params: data
+      params: reqUrl ? reqUrl.data : undefined
     })
   },
-  update: (params, data) => {
-    return axios.post(getUrl('classesOne', params), data)
+  update: reqUrl => {
+    return axios.post(getUrl('classesOne', reqUrl.params), reqUrl.data)
   },
-  put: data => {
-    return axios.put(getUrl('classes'), data)
+  put: reqUrl => {
+    return axios.put(getUrl('classes'), reqUrl.data)
   },
-  delete: (params, data) => {
-    return axios.delete(getUrl('classesOne', params), {
-      data: data,
+  delete: reqUrl => {
+    return axios.delete(getUrl('classesOne', reqUrl.params), {
+      data: reqUrl.data,
     })
   }
 }

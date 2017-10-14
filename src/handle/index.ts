@@ -1,28 +1,32 @@
-import { AxiosPromise, AxiosResponse } from 'axios'
+import { AxiosResponse, AxiosPromise } from 'axios'
+import Vue from 'vue'
 
 export const handleRes = (res, options: { errorMsg?: string, successMsg?: string } = {}) => {
   let status
   if (res.code === -1) {
-    UIkit.notify({
-      message: '系统错误 code: ' + res.code,
-      status: 'danger',
-      timeout: 1500,
-    })
+    // UIkit.notify({
+    //   message: '系统错误 code: ' + res.code,
+    //   status: 'danger',
+    //   timeout: 1500,
+    // })
+    Vue['$toast'].error('系统错误 code: ' + res.code)
     status = false
   }
   else if (res.code === 1) {
-    UIkit.notify({
-      message: options.errorMsg || res.msg || ('操作失败 code: ' + res.code),
-      status: 'warning',
-      timeout: 1500,
-    })
+    // UIkit.notify({
+    //   message: options.errorMsg || res.msg || ('操作失败 code: ' + res.code),
+    //   status: 'warning',
+    //   timeout: 1500,
+    // })
+    Vue['$toast'].error(options.errorMsg || res.msg || ('操作失败 code: ' + res.code))
     status = false
   } else {
-    UIkit.notify({
-      message: options.successMsg || res.msg || '操作成功',
-      status: 'success',
-      timeout: 1500,
-    })
+    // UIkit.notify({
+    //   message: options.successMsg || res.msg || '操作成功',
+    //   status: 'success',
+    //   timeout: 1500,
+    // })
+    Vue['$toast'].success(options.successMsg || res.msg || '操作成功')
     status = true
   }
   return status
@@ -50,11 +54,8 @@ export function parseJson(response: AxiosResponse) {
  * @param {Function} cb 成功回调
  * @param {Function} cb2 失败回调
  */
-export function fetchItem(task: Function, body: { params?: Object, data?: Object } = {}, cb?: Function, cb2?: Function) {
-  if (body.params) {
-    task = task.bind(null, body.params)
-  }
-  return task(body.data)
+export function fetchItem(task: { (reqUrl: UrlConfig): AxiosPromise }, body: UrlConfig = {}, cb?: Function, cb2?: Function) {
+  return task(body)
     .then(checkStatus)
     .then(parseJson)
     .then(json => {

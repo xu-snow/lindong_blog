@@ -2,37 +2,35 @@ import { getUrl } from './url'
 import axios, { AxiosPromise } from 'axios'
 
 interface ArticlesInterface {
-  get(data: { [key: string]: string }): AxiosPromise
-  getOne(params: { [key: string]: string }): AxiosPromise
-  update(params: { [key: string]: string }, data: Object): AxiosPromise
-  put(data: Object): AxiosPromise
-  delete(params: { [key: string]: string }, data: Object): AxiosPromise
+  get(reqUrl: UrlConfig): AxiosPromise
+  getOne(reqUrl: UrlConfig): AxiosPromise
+  update(reqUrl: UrlConfig): AxiosPromise
+  put(reqUrl: UrlConfig): AxiosPromise
+  delete(reqUrl: UrlConfig): AxiosPromise
 }
 
 let articles: ArticlesInterface = {
-  get: (data = {}) => {
-
+  get: (reqUrl) => {
     return axios.get(getUrl('articles'), {
-      params: data,
+      params: reqUrl.data,
       responseType: 'json' // 默认
     })
-
   },
-  getOne: params => {
-    return axios.get(getUrl('articlesOne', params))
+  getOne: reqUrl => {
+    return axios.get(getUrl('articlesOne', reqUrl.params))
   },
-  update: (params, data) => {
+  update: reqUrl => {
 
-    return axios.post(getUrl('articlesOne', params), data)
+    return axios.post(getUrl('articlesOne', reqUrl.params), reqUrl.data)
   },
-  put: data => {
+  put: reqUrl => {
 
-    return axios.put(getUrl('articles'), data)
+    return axios.put(getUrl('articles'), reqUrl.data)
   },
-  delete: (params, data) => {
+  delete: reqUrl => {
 
-    return axios.delete(getUrl('articlesOne', params), {
-      data: data,
+    return axios.delete(getUrl('articlesOne', reqUrl.params), {
+      data: reqUrl.data,
     })
   }
 }

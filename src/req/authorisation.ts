@@ -2,12 +2,12 @@ import { getUrl } from './url'
 import axios, { AxiosPromise } from 'axios'
 
 interface AuthorisationInterface {
-  login(data: Object): AxiosPromise
+  login(reqUrl: UrlConfig): AxiosPromise
 }
 
 let authorisation: AuthorisationInterface = {
-  login: data => {
-    return axios.post(getUrl('login'), data)
+  login: reqUrl => {
+    return axios.post(getUrl('login'), reqUrl.data)
   }
 }
 

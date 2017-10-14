@@ -49,7 +49,7 @@ export default class List extends Vue {
 
   beforeRouteEnter(to: Vue.Route, from: Vue.Route, next: Vue.next) {
     let temp
-    Promise.all([resource.classes.get().then(parseJson), resource.articles.get(to.query).then(parseJson)])
+    Promise.all([resource.classes.get({}).then(parseJson), resource.articles.get({ data: to.query }).then(parseJson)])
       .then(res => {
         next((vm: List) => {
           vm.classes = res[0].classes
@@ -64,7 +64,7 @@ export default class List extends Vue {
       next()
       this.articles.data = res.articles
     })
-    
+
   }
 
 

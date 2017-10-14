@@ -115,7 +115,7 @@ export default class Create extends Vue {
     }
     let params = to.params, task: any[] = []
     task.push(resource.classes.get().then(parseJson))
-    params.id && task.push(resource.articles.getOne(params).then(parseJson))
+    params.id && task.push(resource.articles.getOne({params}).then(parseJson))
 
     Promise.all(task)
       .then(res => {
