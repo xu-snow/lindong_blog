@@ -1,30 +1,31 @@
 <template>
   <div>
-    <mu-toast :style="{ backgroundColor:color}" v-if="toast" message="msg" @close="hideToast" >
+    <mu-toast :style="{ backgroundColor:color}" v-if="toast" :message="msg" @close="hideToast">
     </mu-toast>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       toast: false,
-      msg:'',
-      color:'#f44336'
+      msg: '',
+      color: ''
     }
   },
-  
-  
+
+
   methods: {
-    showToast (msg,color) {
+    showToast(msg, color) {
+      debugger
       this.toast = true
       this.msg = msg
       this.color = color
       if (this.toastTimer) clearTimeout(this.toastTimer)
       this.toastTimer = setTimeout(() => { this.toast = false }, 2000)
     },
-    hideToast () {
+    hideToast() {
       this.toast = false
       if (this.toastTimer) clearTimeout(this.toastTimer)
     }
