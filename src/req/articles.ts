@@ -20,11 +20,9 @@ let articles: ArticlesInterface = {
     return axios.get(getUrl('articlesOne', reqUrl.params))
   },
   update: reqUrl => {
-
     return axios.post(getUrl('articlesOne', reqUrl.params), reqUrl.data)
   },
   put: reqUrl => {
-
     return axios.put(getUrl('articles'), reqUrl.data)
   },
   delete: reqUrl => {

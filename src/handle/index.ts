@@ -1,36 +1,33 @@
 import { AxiosResponse, AxiosPromise } from 'axios'
 import Vue from 'vue'
 
+/**
+ * 提示框
+ * @param res [请求结果]
+ * @param options [成功或失败的回调文字]
+ */
 export const handleRes = (res, options: { errorMsg?: string, successMsg?: string } = {}) => {
-  let status
+  let status: boolean
   if (res.code === -1) {
-    // UIkit.notify({
-    //   message: '系统错误 code: ' + res.code,
-    //   status: 'danger',
-    //   timeout: 1500,
-    // })
     Vue['$toast'].error('系统错误 code: ' + res.code)
     status = false
   }
   else if (res.code === 1) {
-    // UIkit.notify({
-    //   message: options.errorMsg || res.msg || ('操作失败 code: ' + res.code),
-    //   status: 'warning',
-    //   timeout: 1500,
-    // })
     Vue['$toast'].error(options.errorMsg || res.msg || ('操作失败 code: ' + res.code))
     status = false
   } else {
-    // UIkit.notify({
-    //   message: options.successMsg || res.msg || '操作成功',
-    //   status: 'success',
-    //   timeout: 1500,
-    // })
     Vue['$toast'].success(options.successMsg || res.msg || '操作成功')
     status = true
   }
   return status
 }
+
+/**
+ * 检查请求数据
+ * @export
+ * @param {AxiosResponse} response 
+ * @returns 
+ */
 export function checkStatus(response: AxiosResponse) {
   if (response.status >= 200 && response.status < 300) {
     return response

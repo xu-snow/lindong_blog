@@ -14,11 +14,8 @@ export default {
       color: ''
     }
   },
-
-
   methods: {
     showToast(msg, color) {
-      debugger
       this.toast = true
       this.msg = msg
       this.color = color
