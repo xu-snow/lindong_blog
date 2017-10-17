@@ -1,21 +1,17 @@
 <template lang="jade">
-	ul.admin-nav.uk-nav.uk-nav-side
-		li
-			router-link(to="/admin/articles") 文章列表
-		li
-			router-link(to="/admin/classes") 分类管理
+	mu-drawer(:open="open",:docked="docked",class="admin-nav")
+		mu-list
+			mu-list-item(v-for="item,key in lists", :title="item.title",:to="item.href" ,:key="key",:exact="true")
+				mu-icon(slot="left" ,:value="item.icon")
 </template>
 
-<style lang="stylus">
-	.admin-nav 
-		padding-top: 30px
-
-		a
-			padding: 5px 15px
-
-		li>a.router-link-active
-			background #009dd8
-			color #fff
-			box-shadow inset 0 2px 4px rgba(0,0,0,.2)
-			text-shadow 0 -1px 0 rgba(0,0,0,.2)
+<style lang="scss">
+	.admin-nav {
+		.router-link-active .mu-item-title {
+			color:#ff4081;
+		}
+		a:hover{
+				text-decoration:none;
+		}
+	}
 </style>

@@ -2,7 +2,7 @@
  * @Author: zhengxu 
  * @Date: 2017-09-22 10:09:16 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-09-25 22:20:09
+ * @Last Modified time: 2017-10-17 22:23:49
  */
 import Vue from '@/Base'
 import { Component, Watch } from 'vue-property-decorator'
@@ -28,10 +28,12 @@ export default class List extends Vue {
     }, 'classes.name', 'date'],
     data: []
   }
+  filter: string = '全部'
   // computed
-  get filter() {
-    return this.$route.query.filter || '全部'
-  }
+  // get filter() {
+  //   console.log(this.$route.query.filter)
+  //   return '全部'
+  // }
 
   // methods
   change(item) {
@@ -47,6 +49,10 @@ export default class List extends Vue {
 
   }
 
+  handleChange(value) {
+    this.filter = value
+  }
+
   beforeRouteEnter(to: Vue.Route, from: Vue.Route, next: Vue.next) {
     let temp
     Promise.all([resource.classes.get({}).then(parseJson), resource.articles.get({ data: to.query }).then(parseJson)])
@@ -54,6 +60,7 @@ export default class List extends Vue {
         next((vm: List) => {
           vm.classes = res[0].classes
           vm.articles.data = res[1].articles
+          vm.filter = to.query.filter || '全部'
         })
       })
       .catch(e => console.log(e))

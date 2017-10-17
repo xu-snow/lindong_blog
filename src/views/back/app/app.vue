@@ -1,17 +1,19 @@
 
 <template lang="jade">
-	div.uk-flex.uk-position-absolute.uk-width-1-1.uk-height-1-1
-		div.g-sd
+	//- div.uk-flex.uk-position-absolute.uk-width-1-1.uk-height-1-1
+	div
+		div
 			my-nav
-		div.g-mn.uk-flex-item-1
-			router-view
+		div.admin-g-mn
+			mu-content-block
+				router-view
 </template>
 
 <style lang="stylus">
-	.g-sd
+	.admin-g-sd
 		width 200px
 		border-right 1px solid #e5e5e5
 
-	.g-mn
-		padding 30px 15px
+	.admin-g-mn
+		padding-left 256px
 </style>
