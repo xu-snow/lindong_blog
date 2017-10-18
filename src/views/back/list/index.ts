@@ -2,7 +2,7 @@
  * @Author: zhengxu 
  * @Date: 2017-09-22 10:09:16 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-10-17 22:23:49
+ * @Last Modified time: 2017-10-18 20:12:34
  */
 import Vue from '@/Base'
 import { Component, Watch } from 'vue-property-decorator'
@@ -19,6 +19,8 @@ import { handleRes, fetchItem, parseJson } from '@/handle'
 })
 export default class List extends Vue {
   classes: any[] = []
+  trigger = null
+  open: boolean = false
   articles: { [key: string]: any } = {
     names: ['ID', '标题', '分类', '创建时间'],
     attrs: ['id', {
@@ -28,29 +30,32 @@ export default class List extends Vue {
     }, 'classes.name', 'date'],
     data: []
   }
-  filter: string = '全部'
+
   // computed
-  // get filter() {
-  //   console.log(this.$route.query.filter)
-  //   return '全部'
-  // }
+  get filter(): string {
+    return this.$route.query.filter || '全部'
+  }
 
   // methods
   change(item) {
     this.$router.push({ path: '/admin/articles/' + item.id })
   }
   remove(item) {
-    debugger
     let params = { id: item.id },
       data = { data: JSON.stringify({ classes: item.classes.id }) }
     fetchItem(resource.articles.delete, { params: params, data: data }, (res) => {
       handleRes(res)
     })
-
+  }
+  toggle() {
+    this.open = !this.open
+  }
+  handleClose() {
+    this.open = false
   }
 
-  handleChange(value) {
-    this.filter = value
+  mounted() {
+    this.trigger = this.$refs.button['$el']
   }
 
   beforeRouteEnter(to: Vue.Route, from: Vue.Route, next: Vue.next) {
@@ -60,7 +65,6 @@ export default class List extends Vue {
         next((vm: List) => {
           vm.classes = res[0].classes
           vm.articles.data = res[1].articles
-          vm.filter = to.query.filter || '全部'
         })
       })
       .catch(e => console.log(e))
@@ -71,11 +75,9 @@ export default class List extends Vue {
       next()
       this.articles.data = res.articles
     })
-
   }
 
-
-  // todo 用beforeRouteUpdate 看行不行
+  //  用beforeRouteUpdate 看行不行
   // @Watch('$route')
   // onRouteChange() {
   //   fetchItem(resource.articles.get, { params: this.$route.query }, (res) => {

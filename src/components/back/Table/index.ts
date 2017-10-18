@@ -2,11 +2,12 @@
  * @Author: zhengxu 
  * @Date: 2017-09-22 14:36:05 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-09-25 19:57:29
+ * @Last Modified time: 2017-10-18 22:08:08
  */
 import Vue from '@/Base'
 import { Component, Prop } from 'vue-property-decorator'
 import template from './table.vue'
+import get from 'lodash/get'
 
 
 @Component({
@@ -36,22 +37,8 @@ export default class Table extends Vue {
   }
   renderHtml($data, attr) {
     return '<a href="' + attr.express + $data.id + '" target="_blank">' + $data.title + '</a>'
-    // return '<a href="' + eval(attr.express) + '" target="_blank">' + $data.title + '</a>'
   }
   untie(data, attr) {
-    let array = attr.split('.'), temp
-
-    if (array.length === 1) {
-      temp = data[array[0]]
-    } else {
-
-      temp = data[array.shift()]
-
-      while (array.length) {
-        temp = temp[array.shift()]
-      }
-    }
-
-    return temp
-  }
+    return get(data, attr)
+  } 
 }

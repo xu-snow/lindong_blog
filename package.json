@@ -17,14 +17,16 @@
     "axios": "^0.16.2",
     "gulp": "^3.9.1",
     "jquery": "^3.1.1",
-    "uikit": "^2.27.1",
+    "lodash": "^4.17.4",
     "muse-ui": "^2.1.0",
+    "uikit": "^2.27.1",
     "vue": "^2.0.1",
     "vue-class-component": "~5.0.2",
     "vue-property-decorator": "~5.2.1",
     "vue-router": "^2.0.1"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.77",
     "@types/node": "~8.0.24",
     "@types/uikit": "^2.27.5",
     "autoprefixer": "^7.1.2",
