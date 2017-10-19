@@ -9,14 +9,14 @@ import Vue from 'vue'
 export const handleRes = (res, options: { errorMsg?: string, successMsg?: string } = {}) => {
   let status: boolean
   if (res.code === -1) {
-    Vue['$toast'].error('系统错误 code: ' + res.code)
+    Vue.$toast.error('系统错误 code: ' + res.code)
     status = false
   }
   else if (res.code === 1) {
-    Vue['$toast'].error(options.errorMsg || res.msg || ('操作失败 code: ' + res.code))
+    Vue.$toast.error(options.errorMsg || res.msg || ('操作失败 code: ' + res.code))
     status = false
   } else {
-    Vue['$toast'].success(options.successMsg || res.msg || '操作成功')
+    Vue.$toast.success(options.successMsg || res.msg || '操作成功')
     status = true
   }
   return status

@@ -1,9 +1,7 @@
 <template lang="jade">
 	div
-		div.control.uk-margin-bottom.flex
-			button.uk-button(@click="create") 新建分类 
-				i.uk-icon-plus
-
+		div
+			mu-raised-button(label="新建分类",@click="create",labelPosition="before" icon="add",:secondary="true")
 		div
 			class-list(
 				:names="classes.names"

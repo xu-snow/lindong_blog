@@ -2,7 +2,7 @@
  * @Author: zhengxu 
  * @Date: 2017-09-21 21:43:43 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-09-25 19:54:20
+ * @Last Modified time: 2017-10-19 16:14:03
  */
 import Vue from '@/Base'
 import { Component, Watch, Prop } from 'vue-property-decorator'
@@ -49,7 +49,6 @@ export default class Create extends Vue {
 
   create() {
     let _self = this, data
-
     if (!_self.article.bg.name) {
       UIkit.notify({
         message: '请添加背景图',

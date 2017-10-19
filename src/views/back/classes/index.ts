@@ -2,7 +2,7 @@
  * @Author: zhengxu 
  * @Date: 2017-09-20 14:18:12 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-09-25 19:54:41
+ * @Last Modified time: 2017-10-19 22:08:28
  */
 import Vue from '@/Base'
 import { Component } from 'vue-property-decorator'
@@ -26,22 +26,23 @@ export default class Classes extends Vue {
   }
   create() {
     let _self = this
-    UIkit.modal.prompt('请输入分类名称', '', value => {
-      if (!value) {
-        UIkit.notify({
-          message: '分类名称不能为空',
-          status: 'warning',
-          timeout: 1000
-        })
-        return
-      }
-      fetchItem(resource.classes.put, { data: { name: value } }, res => {
-        let r = handleRes(res)
-        if (r) {
-          _self.classes.data.push(res.result)
-        }
-      })
-    })
+    this.$prompt.show('呵呵呵')
+    // UIkit.modal.prompt('请输入分类名称', '', value => {
+    //   if (!value) {
+    //     UIkit.notify({
+    //       message: '分类名称不能为空',
+    //       status: 'warning',
+    //       timeout: 1000
+    //     })
+    //     return
+    //   }
+    //   fetchItem(resource.classes.put, { data: { name: value } }, res => {
+    //     let r = handleRes(res)
+    //     if (r) {
+    //       _self.classes.data.push(res.result)
+    //     }
+    //   })
+    // })
   }
   change(item) {
     let oldName = item.name,

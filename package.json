@@ -21,9 +21,9 @@
     "muse-ui": "^2.1.0",
     "uikit": "^2.27.1",
     "vue": "^2.0.1",
-    "vue-class-component": "~5.0.2",
-    "vue-property-decorator": "~5.2.1",
-    "vue-router": "^2.0.1"
+    "vue-class-component": "^6.0.0",
+    "vue-property-decorator": "^6.0.0",
+    "vue-router": "^3.0.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.77",
