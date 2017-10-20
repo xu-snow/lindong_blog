@@ -29,10 +29,13 @@ export default class Table extends Vue {
     this.$emit('change', item)
   }
   remove(event, item) {
-    let vm = this
-    UIkit.modal.confirm('确定删除该条数据?', () => {
-      $(event.target).parents('tr').remove()
-      vm.$emit('remove', item)
+    this.$confrim({
+      title: '提示',
+      defaultValue: '确定删除该条数据?',
+      callback: () => {
+        $(event.target).parents('tr').remove()
+        this.$emit('remove', item)
+      }
     })
   }
   renderHtml($data, attr) {
@@ -40,5 +43,5 @@ export default class Table extends Vue {
   }
   untie(data, attr) {
     return get(data, attr)
-  } 
+  }
 }

@@ -2,7 +2,7 @@
  * @Author: zhengxu 
  * @Date: 2017-09-20 14:18:12 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-10-19 22:08:28
+ * @Last Modified time: 2017-10-20 16:51:09
  */
 import Vue from '@/Base'
 import { Component } from 'vue-property-decorator'
@@ -25,45 +25,43 @@ export default class Classes extends Vue {
     data: []
   }
   create() {
-    let _self = this
-    this.$prompt.show('呵呵呵')
-    // UIkit.modal.prompt('请输入分类名称', '', value => {
-    //   if (!value) {
-    //     UIkit.notify({
-    //       message: '分类名称不能为空',
-    //       status: 'warning',
-    //       timeout: 1000
-    //     })
-    //     return
-    //   }
-    //   fetchItem(resource.classes.put, { data: { name: value } }, res => {
-    //     let r = handleRes(res)
-    //     if (r) {
-    //       _self.classes.data.push(res.result)
-    //     }
-    //   })
-    // })
-  }
-  change(item) {
-    let oldName = item.name,
-      index = item._index  // class索引
-    UIkit.modal.prompt('请输入新分类名称', oldName, value => {
-      if (oldName !== value) {
-        fetchItem(resource.classes.update, { params: { id: item.id }, data: { name: value } }, res => {
-          let r = handleRes(res, { successMsg: '修改成功' })
+    this.$prompt({
+      title: '请输入分类名称',
+      callback: (value: string) => {
+        if (!value) {
+          this.$toast.info('分类名称不能为空')
+          return
+        }
+        fetchItem(resource.classes.put, { data: { name: value } }, res => {
+          let r = handleRes(res)
           if (r) {
-            item.name = value
+            this.classes.data.push(res.result)
           }
         })
       }
     })
   }
-  remove(item) {
-    UIkit.notify({
-      message: '删除未生效, 暂未提供删除分类',
-      status: 'message',
-      timeout: 1000
+  change(item) {
+    let oldName = item.name,
+      index = item._index  // class索引
+    this.$prompt({
+      defaultValue: oldName,
+      title: '请输入新分类名称',
+      callback: (value) => {
+        if (oldName !== value) {
+          fetchItem(resource.classes.update, { params: { id: item.id }, data: { name: value } }, res => {
+            let r = handleRes(res, { successMsg: '修改成功' })
+            if (r) {
+              item.name = value
+            }
+          })
+        }
+      }
     })
+  }
+
+  remove(item) {
+    this.$toast.info('删除未生效, 暂未提供删除分类')
   }
 
   beforeRouteEnter(to: Vue.Route, from: Vue.Route, next: Vue.next) {

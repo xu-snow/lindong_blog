@@ -2,7 +2,7 @@
 	footer.g-footer
 		p 
 			mu-badge(style="padding-right:10px") Copyright
-				span(style="font-size: 20px",slot="content" )&copy;
+				span(style="font-size: 20px",slot="content" ) &copy;
 			span(style="padding-left:10px") {{time}} | LinDong
 </template>
 
