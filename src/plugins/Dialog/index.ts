@@ -10,7 +10,15 @@ import Vue, { PluginObject, ComponentOptions } from 'vue'
 import DialogComponent from './Dialog.vue'
 namespace DialogAction {
   export interface Show {
-    (option?: { callback?: Function, isInput?: boolean, title?: string, isShowCancel?: boolean, defaultValue?: string }): void
+    /**
+     * 
+     * @param option 选项
+     *    {String}        defaultValue  - 原始值
+     *    {String}        title         - 弹框标题
+     *    {function}      callback      - 确认回调
+     *    {Boolean}       isShowCancel  - 是否显示取消按钮
+     */
+    (option: { callback?: Function, title?: string, isShowCancel?: boolean, defaultValue?: string }): void
   }
 }
 
@@ -19,10 +27,10 @@ declare module 'vue/types/vue' {
     $prompt: DialogAction.Show
     $confrim: DialogAction.Show
   }
-  interface VueConstructor {
-    $prompt: DialogAction.Show
-    $confrim: DialogAction.Show
-  }
+  // interface VueConstructor {
+  //   $prompt: DialogAction.Show
+  //   $confrim: DialogAction.Show
+  // }
 }
 // declare module 'vue/types/options' {
 //   interface ComponentOptions<V extends Vue> {
@@ -46,16 +54,7 @@ const Plugin: PluginObject<undefined> = {
       })
       document.body.appendChild($vm.$el)
     }
-    /**
-     * 
-     * @param option 选项
-     *    {String}        defaultValue  - 原始值
-     *    {String}        title         - 弹框标题
-     *    {function}      callback      - 确认回调
-     *    {Boolean}       isShowCancel  - 是否显示取消按钮
-     */
     const show: DialogAction.Show = function (option = {}) {
-      option.isInput = !!option.isInput
       Object.assign($vm, option, { value: option.defaultValue || '' })
       $vm.isOpened = true
     }

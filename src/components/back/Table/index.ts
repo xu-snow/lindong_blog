@@ -2,7 +2,7 @@
  * @Author: zhengxu 
  * @Date: 2017-09-22 14:36:05 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-10-19 15:23:51
+ * @Last Modified time: 2017-10-24 15:55:49
  */
 import Vue from '@/Base'
 import { Component, Prop } from 'vue-property-decorator'
@@ -18,7 +18,7 @@ export default class Table extends Vue {
 
   // Prop
   @Prop()
-  data: any[]
+  datas: any[]
   @Prop()
   names: any[]
   @Prop()
@@ -28,13 +28,13 @@ export default class Table extends Vue {
   change(event, item) {
     this.$emit('change', item)
   }
-  remove(event, item) {
+  remove(event, item, index) {
     this.$confrim({
       title: '提示',
       defaultValue: '确定删除该条数据?',
       callback: () => {
-        $(event.target).parents('tr').remove()
-        this.$emit('remove', item)
+        // $(event.target).parents('tr').remove()
+        this.$emit('remove', item, index)
       }
     })
   }

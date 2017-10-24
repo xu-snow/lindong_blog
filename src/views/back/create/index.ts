@@ -2,18 +2,17 @@
  * @Author: zhengxu 
  * @Date: 2017-09-21 21:43:43 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-10-19 16:14:03
+ * @Last Modified time: 2017-10-24 21:06:25
  */
 import Vue from '@/Base'
 import { Component, Watch, Prop } from 'vue-property-decorator'
 import template from './create.vue'
 import { resource, isProduction } from '@/req'
-import { handleRes, fetchItem, parseJson } from '@/handle'
+import { handleRes, fetchItem } from '@/handle'
 
 const reload = (vm, data?) => {
   vm.status = 1
   vm.disabled = true
-
   vm.oldBg = data ? data.bg.name : vm.article.bg.name
   vm.changeBg = false
   vm.oldClasses = data ? data.classes : vm.article.classes
@@ -21,8 +20,7 @@ const reload = (vm, data?) => {
 }
 
 @Component({
-  mixins: [template],
-
+  mixins: [template]
 })
 export default class Create extends Vue {
   article: { [key: string]: any } = {
@@ -37,7 +35,7 @@ export default class Create extends Vue {
   }
   classes: any = []
   // control variable
-  status: number = 0 // create or change, change is 1, create is 0, default change
+  status: number = 0 // create or change, change is 1, create is 0, default create
   disabled: boolean = false
   oldBg: any = ''
   oldClasses: any = ''
@@ -112,14 +110,14 @@ export default class Create extends Vue {
       next()
       return
     }
-    let params = to.params, task: any[] = []
-    task.push(resource.classes.get().then(parseJson))
-    params.id && task.push(resource.articles.getOne({params}).then(parseJson))
+    let params = to.params, // id:xxx
+      task: any[] = []
+    task.push(fetchItem(resource.classes.get))
+    params.id && task.push(fetchItem(resource.articles.getOne, { params }))
 
     Promise.all(task)
       .then(res => {
-        let classes = res[0].classes,
-          article
+        let classes = res[0].classes, article
         if (res[1]) {
           article = res[1].article
           article.classes = article.classes.id

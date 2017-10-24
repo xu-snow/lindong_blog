@@ -1,5 +1,6 @@
 import { AxiosResponse, AxiosPromise } from 'axios'
 import Vue from 'vue'
+import identity from 'lodash/identity'
 
 /**
  * 提示框
@@ -56,10 +57,15 @@ export function fetchItem(task: { (reqUrl: UrlConfig): AxiosPromise }, body: Url
     .then(checkStatus)
     .then(parseJson)
     .then(json => {
-      // todo 这里还有东西要写
       cb && cb(json)
+      return json
     })
     .catch(e => {
+      Vue.$toast.error(e && e.message)
       cb2 && cb2()
     })
 }
+
+// export function returnfetchData(...arg) {
+//   return fetchItem(arg[0], arg[1], identity)
+// }

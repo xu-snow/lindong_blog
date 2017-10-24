@@ -14,9 +14,9 @@
 			mu-raised-button(label="新建文章",:secondary="true",to="/admin/articles/create",tag="button")
 		div.articles
 			article-list(
-				:names="articles.names"
-				:attrs="articles.attrs"
-				:data="articles.data"
+				:names="names"
+				:attrs="attrs"
+				:datas="datas"
 				@change="change"
 				@remove="remove")
 </template>

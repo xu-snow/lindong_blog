@@ -2,7 +2,7 @@
  * @Author: zhengxu 
  * @Date: 2017-09-22 10:09:16 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-10-19 16:04:16
+ * @Last Modified time: 2017-10-24 15:59:42
  */
 import Vue from '@/Base'
 import { Component, Watch } from 'vue-property-decorator'
@@ -21,15 +21,15 @@ export default class List extends Vue {
   classes: any[] = []
   trigger = null
   open: boolean = false
-  articles: { [key: string]: any } = {
-    names: ['ID', '标题', '分类', '创建时间'],
-    attrs: ['id', {
-      type: 'link',
-      name: 'title',
-      express: '/articles/'
-    }, 'classes.name', 'date'],
-    data: []
-  }
+
+  names: string[] = ['ID', '标题', '分类', '创建时间']
+  attrs: any[] = ['id', {
+    type: 'link',
+    name: 'title',
+    express: '/articles/'
+  }, 'classes.name', 'date']
+
+  datas: any[] = []
 
   // computed
   get filter(): string {
@@ -40,10 +40,11 @@ export default class List extends Vue {
   change(item) {
     this.$router.push({ path: '/admin/articles/' + item.id })
   }
-  remove(item) {
+  remove(item, index) {
     let params = { id: item.id },
       data = { data: JSON.stringify({ classes: item.classes.id }) }
     fetchItem(resource.articles.delete, { params: params, data: data }, (res) => {
+      this.datas.splice(index, 1)
       handleRes(res)
     })
   }
@@ -64,7 +65,7 @@ export default class List extends Vue {
       .then(res => {
         next((vm: List) => {
           vm.classes = res[0].classes
-          vm.articles.data = res[1].articles
+          vm.datas = res[1].articles
         })
       })
       .catch(e => console.log(e))
@@ -73,7 +74,7 @@ export default class List extends Vue {
   beforeRouteUpdate(to: Vue.Route, from: Vue.Route, next: Vue.next) {
     fetchItem(resource.articles.get, { data: to.query }, (res) => {
       next()
-      this.articles.data = res.articles
+      this.datas = res.articles
     })
   }
 

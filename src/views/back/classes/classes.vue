@@ -6,7 +6,7 @@
 			class-list(
 				:names="classes.names"
 				:attrs="classes.attrs"
-				:data="classes.data"
+				:datas="classes.data"
 				@change="change"
 				@remove="remove"
 			)

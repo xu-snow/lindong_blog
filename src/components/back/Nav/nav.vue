@@ -6,12 +6,15 @@
 </template>
 
 <style lang="scss">
-	.admin-nav {
-		.router-link-active .mu-item-title {
-			color:#ff4081;
-		}
-		a:hover{
-				text-decoration:none;
+.admin-nav {
+	.router-link-active {
+		.mu-icon,
+		.mu-item-title {
+			color: #ff4081;
 		}
 	}
+	a:hover {
+		text-decoration: none;
+	}
+}
 </style>
