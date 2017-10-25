@@ -24,9 +24,14 @@ export default class Login extends Vue {
       let r = handleRes(res, { errorMsg: '账号或密码错误', successMsg: '登录成功' })
       if (r) {
         sessionStorage.setItem('isLogin', '1')
-        
+
         this.$router.push({ path: this.$route.query.redirect || '/admin/articles' })
       }
     })
+  }
+
+
+  mounted() {
+    this.$refs.input['focus']()
   }
 }

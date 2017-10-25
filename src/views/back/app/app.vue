@@ -10,10 +10,6 @@
 </template>
 
 <style lang="stylus">
-	.admin-g-sd
-		width 200px
-		border-right 1px solid #e5e5e5
-
 	.admin-g-mn
 		padding-left 256px
 </style>

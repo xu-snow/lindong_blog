@@ -4,7 +4,7 @@
       mu-paper
         form(v-on:submit.prevent="submit")
           mu-content-block
-            mu-text-field(label="用户名",v-model="user",hintText="请输入用户名",type="text",:labelFloat="true",required,icon="account_circle")
+            mu-text-field(label="用户名",ref="input",v-model="user",hintText="请输入用户名",type="text",:labelFloat="true",required,icon="account_circle")
             br
             mu-text-field(label="密码",v-model="password",hintText="请输入密码",type="password",:labelFloat="true",required,icon="lock")
             br

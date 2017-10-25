@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import ToastComponent from './Toast.vue'
-import { PluginObject, ComponentOptions } from 'vue'
+import { PluginObject } from 'vue'
 import {
   success,
   error,

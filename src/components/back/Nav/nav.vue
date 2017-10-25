@@ -1,5 +1,5 @@
 <template lang="jade">
-	mu-drawer(:open="open",:docked="docked",class="admin-nav")
+	mu-drawer.admin-nav(:open="open",:docked="docked")
 		mu-list
 			mu-list-item(v-for="item,key in lists", :title="item.title",:to="item.href" ,:key="key",:exact="true")
 				mu-icon(slot="left" ,:value="item.icon")

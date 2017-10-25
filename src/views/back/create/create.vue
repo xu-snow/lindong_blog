@@ -1,5 +1,5 @@
 <template lang="jade">
-	div
+	div.admin-create
 		form(@submit.prevent="submit")
 			mu-content-block
 				div
@@ -12,20 +12,10 @@
 				div
 					mu-raised-button(label="背景选择",:disabled="disabled")
 						input.file-img(type="file", @change="uploadImg($event)", :disabled="disabled")
-				div
-					img(:src="article.bg.ctn", v-show="article.bg.ctn")
-				//- div.uk-grid.uk-grid-small
-				//- 	div.uk-width-1-10 背景图
-				//- 	div.uk-width-4-10
-				//- 		button.uk-button.uk-position-relative(type="button", :disabled="disabled")
-				//- 			i.uk-icon-plus
-				//- 			input#file.file-img(type="file", @change="uploadImg($event)", :disabled="disabled")
-				//- div.uk-grid.uk-grid-small.uk-margin-top-remove
-				//- 	div.uk-width-1-10
-				//- 	div#bg-wrap.uk-width-4-10
-				//- 		img.uk-margin-small-top(:src="article.bg.ctn", v-show="article.bg.ctn")
-				div
-					mu-text-field(label="正文" ,:multiLine="true",:fullWidth ="true",:rows="5" ,:rowsMax="10",v-model="article.markdown", :disabled="disabled")
+				mu-row.small-top
+					mu-col( width="100" tablet="50" desktop="33")
+						img.bg-img(:src="article.bg.ctn", v-show="article.bg.ctn")		
+				mu-text-field(label="正文" ,:multiLine="true",:fullWidth ="true",:rows="5" ,:rowsMax="10",v-model="article.markdown", :disabled="disabled")
 				div(style="text-align: center")
 					mu-raised-button(label="提交" type="submit", v-show="!disabled") 
 					mu-raised-button(label="修改" type="button", @click="toggle", v-show="disabled") 
@@ -39,9 +29,9 @@
 		left 0
 		top 0
 		opacity 0
-
-	#editor
-		textarea
+	.admin-create
+		.bg-img
 			width 100%
-			height 300px
+		.small-top
+			margin-top 10px
 </style>

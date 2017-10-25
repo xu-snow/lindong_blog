@@ -6,7 +6,7 @@
  *    this.$prompt.hide()
  *
  */
-import Vue, { PluginObject, ComponentOptions } from 'vue'
+import Vue, { PluginObject } from 'vue'
 import DialogComponent from './Dialog.vue'
 namespace DialogAction {
   export interface Show {

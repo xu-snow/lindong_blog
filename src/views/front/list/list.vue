@@ -1,7 +1,6 @@
 <template lang="jade">
 	div
 		my-head
-
 		section.g-container.f-flex
 			main.g-mn.f-flex-item-1
 				transition(name="fade")
@@ -17,11 +16,6 @@
 </template>
 <style lang="stylus">
 	.article-list
-		.item
-			margin-bottom 35px
-			padding-bottom 35px
-			border-bottom 1px solid #eee
-
 		.info
 			color #999
 			font-size 14px

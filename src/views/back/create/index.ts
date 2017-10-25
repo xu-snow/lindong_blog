@@ -14,9 +14,7 @@ const reload = (vm, data?) => {
   vm.status = 1
   vm.disabled = true
   vm.oldBg = data ? data.bg.name : vm.article.bg.name
-  vm.changeBg = false
   vm.oldClasses = data ? data.classes : vm.article.classes
-  vm.changeClasses = false
 }
 
 @Component({
@@ -46,37 +44,36 @@ export default class Create extends Vue {
   }
 
   create() {
-    let _self = this, data
-    if (!_self.article.bg.name) {
-      UIkit.notify({
-        message: '请添加背景图',
-        status: 'warning',
-        timeout: 1000
-      })
+    let data
+    if (!this.article.bg.name) {
+      this.$toast.error('请添加背景图')
       return false
     }
-
+    if (!this.article.classes) {
+      this.$toast.error('请选择分类')
+      return false
+    }
     // process data
-    data = Object.assign(_self.article, { timestamp: Date.now() })
+    data = Object.assign({}, this.article, { timestamp: Date.now() })
     data = { data: JSON.stringify(data) }
 
     fetchItem(resource.articles.put, { data: data }, (res) => {
       let r = handleRes(res, { successMsg: '添加成功' })
       if (r) {
-        _self.$router.push(String(res.result.id))
-        reload(_self)
+        this.$router.push(String(res.result.id))
+        reload(this)
       }
     })
   }
 
   change() {
-    let _self = this, data
+    let data
     // process data
-    data = Object.assign({ article: _self.article }, { changeBg: _self.changeBg, changeClasses: _self.changeClasses, oldClasses: _self.oldClasses })
+    data = Object.assign({}, { article: this.article }, { changeBg: this.changeBg, changeClasses: this.changeClasses, oldClasses: this.oldClasses })
     data = { data: JSON.stringify(data) }
-    fetchItem(resource.articles.update, { params: _self.$route.params, data: data }, res => {
+    fetchItem(resource.articles.update, { params: this.$route.params, data: data }, res => {
       handleRes(res, { successMsg: '修改成功' })
-      reload(_self)
+      reload(this)
     })
   }
 
