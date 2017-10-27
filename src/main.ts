@@ -7,6 +7,7 @@ import Toast from './plugins/Toast'
 import Prompt from './plugins/Dialog'
 import 'muse-ui/dist/muse-ui.css'
 import 'muse-ui/dist/theme-teal.css'
+import './assets/css/markdown.css'
 
 Vue.use(MuseUI)
 Vue.use(Toast)

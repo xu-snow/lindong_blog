@@ -18,7 +18,9 @@
 				mu-text-field(label="正文" ,:multiLine="true",:fullWidth ="true",:rows="5" ,:rowsMax="10",v-model="article.markdown", :disabled="disabled")
 				div(style="text-align: center")
 					mu-raised-button(label="提交" type="submit", v-show="!disabled") 
-					mu-raised-button(label="修改" type="button", @click="toggle", v-show="disabled") 
+					mu-raised-button(label="修改" type="button", @click="toggle", v-show="disabled")
+				div
+					mavon-editor(ref="md" v-model="editorValue",@imgAdd="$imgAdd", @imgDel="$imgDel")
 </template>
 
 <style lang="stylus">
@@ -34,4 +36,9 @@
 			width 100%
 		.small-top
 			margin-top 10px
+	#editor
+		margin auto
+		width 80%;
+		height  580px
+    
 </style>

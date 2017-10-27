@@ -16,10 +16,9 @@
   "dependencies": {
     "axios": "^0.16.2",
     "gulp": "^3.9.1",
-    "jquery": "^3.1.1",
     "lodash": "^4.17.4",
+    "mavon-editor": "^2.3.0",
     "muse-ui": "^2.1.0",
-    "uikit": "^2.27.1",
     "vue": "^2.0.1",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^6.0.0",
@@ -28,7 +27,6 @@
   "devDependencies": {
     "@types/lodash": "^4.14.77",
     "@types/node": "~8.0.24",
-    "@types/uikit": "^2.27.5",
     "autoprefixer": "^7.1.2",
     "awesome-typescript-loader": "~3.2.3",
     "babel-core": "^6.22.1",

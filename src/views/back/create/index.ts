@@ -2,13 +2,15 @@
  * @Author: zhengxu 
  * @Date: 2017-09-21 21:43:43 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-10-24 21:06:25
+ * @Last Modified time: 2017-10-27 22:17:25
  */
 import Vue from '@/Base'
 import { Component, Watch, Prop } from 'vue-property-decorator'
 import template from './create.vue'
 import { resource, isProduction } from '@/req'
 import { handleRes, fetchItem } from '@/handle'
+import { mavonEditor } from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 
 const reload = (vm, data?) => {
   vm.status = 1
@@ -18,7 +20,11 @@ const reload = (vm, data?) => {
 }
 
 @Component({
-  mixins: [template]
+  mixins: [template],
+  components: {
+    mavonEditor
+    // or 'mavon-editor': mavonEditor
+  }
 })
 export default class Create extends Vue {
   article: { [key: string]: any } = {
@@ -31,6 +37,7 @@ export default class Create extends Vue {
       ctn: ''
     }
   }
+  editorValue: string = ''
   classes: any = []
   // control variable
   status: number = 0 // create or change, change is 1, create is 0, default create
@@ -64,6 +71,14 @@ export default class Create extends Vue {
         reload(this)
       }
     })
+  }
+  $imgAdd(filename, imgfile) {
+    console.log(filename)
+    let md = this.$refs.md
+    // md['$img2Url'](filename, './imgzx')
+  }
+  $imgDel(...arg) {
+    console.log(arg)
   }
 
   change() {

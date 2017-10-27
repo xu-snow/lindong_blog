@@ -9,14 +9,3 @@ interface UrlConfig{
   params?: { [key: string]: string }
   data?:Object
 }
-
-// declare module "vue/types/vue" {
-//     interface Vue {
-//         $toast: {
-//             success: Function,
-//             error: Function,
-//             info: Function
-//         }
-//     }
-// }
-

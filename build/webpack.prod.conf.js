@@ -58,6 +58,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         : config.build.index,
       template: 'index.html',
       inject: true,
+      // chunks: ['app'], // mavon-editor 需要引入的chunk入口名
       minify: {
         removeComments: true,
         collapseWhitespace: true,
