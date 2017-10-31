@@ -5,7 +5,7 @@ import axios, { AxiosPromise } from 'axios'
 interface ClassesInterface {
   get(reqUrl?: UrlConfig): AxiosPromise
   update(reqUrl: UrlConfig): AxiosPromise
-  put(reqUrl: UrlConfig): AxiosPromise
+  post(reqUrl: UrlConfig): AxiosPromise
   delete(reqUrl: UrlConfig): AxiosPromise
 }
 let classes: ClassesInterface = {
@@ -15,10 +15,10 @@ let classes: ClassesInterface = {
     })
   },
   update: reqUrl => {
-    return axios.post(getUrl('classesOne', reqUrl.params), reqUrl.data)
+    return axios.put(getUrl('classesOne', reqUrl.params), reqUrl.data)
   },
-  put: reqUrl => {
-    return axios.put(getUrl('classes'), reqUrl.data)
+  post: reqUrl => {
+    return axios.post(getUrl('classes'), reqUrl.data)
   },
   delete: reqUrl => {
     return axios.delete(getUrl('classesOne', reqUrl.params), {

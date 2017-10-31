@@ -5,7 +5,8 @@ const urlMap = {
   articlesOne: '/resource/articles/:id',
   classes: '/resource/classes',
   classesOne: '/resource/classes/:id',
-  login: '/api/login'
+  login: '/api/login',
+  uploadImage: '/api/uploadImage'
 }
 
 // util method

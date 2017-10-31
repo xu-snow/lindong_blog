@@ -32,7 +32,7 @@ export default class Classes extends Vue {
           this.$toast.info('分类名称不能为空')
           return
         }
-        fetchItem(resource.classes.put, { data: { name: value } }, res => {
+        fetchItem(resource.classes.post, { data: { name: value } }, res => {
           let r = handleRes(res)
           if (r) {
             this.classes.data.push(res.result)

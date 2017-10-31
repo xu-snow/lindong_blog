@@ -20,7 +20,7 @@
 					mu-raised-button(label="提交" type="submit", v-show="!disabled") 
 					mu-raised-button(label="修改" type="button", @click="toggle", v-show="disabled")
 				div
-					mavon-editor(ref="md" v-model="editorValue",@imgAdd="$imgAdd", @imgDel="$imgDel")
+					mavon-editor(ref="md" v-model="article.markdown",@imgAdd="$imgAdd", @imgDel="$imgDel")
 </template>
 
 <style lang="stylus">

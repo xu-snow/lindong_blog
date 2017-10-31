@@ -14,6 +14,7 @@ import sideAbout from '@/components/front/about'
 import listItem from '@/components/front/item'
 import { resource } from '@/req'
 import { fetchItem } from '@/handle'
+import get from 'lodash/get'
 
 @Component({
   mixins: [template],
@@ -26,12 +27,16 @@ import { fetchItem } from '@/handle'
   }
 })
 export default class Article extends Vue {
-  article: any = { classes: {}, bg: {} }
+  article: Object = {}
   beforeRouteEnter(to: Vue.Route, from: Vue.Route, next: Vue.next) {
     fetchItem(resource.articles.getOne, { params: to.params }, (res) => {
       next((vm: Article) => {
         vm.article = res.article
       })
     })
+  }
+
+  getProperty(path) {
+    return get(this.article, path)
   }
 }

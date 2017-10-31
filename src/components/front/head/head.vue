@@ -1,9 +1,9 @@
 <template lang="jade">
 	header.g-hd(:class="{'g-hd-1':article}",:style="style")
 		div.intro
-			p.title {{article ? article.title : 'LinDong BLOG'}}
-			p.descript {{article ? article.digest : '当幸福来敲门'}}
-			p.date(v-if="article") {{article.date + ' | ' + article.classes.name}}
+			p.title {{title ? title : 'LinDong BLOG'}}
+			p.descript {{digest ? digest : '当幸福来敲门'}}
+			p.date(v-if="article") {{date + ' | ' + classesName}}
 </template>
 <style lang="stylus">
 	.g-hd

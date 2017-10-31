@@ -7,7 +7,7 @@
 import Vue from '@/Base'
 import { Component, Watch, Prop } from 'vue-property-decorator'
 import template from './create.vue'
-import { resource, isProduction } from '@/req'
+import { resource, isProduction, uploadImage } from '@/req'
 import { handleRes, fetchItem } from '@/handle'
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
@@ -37,7 +37,7 @@ export default class Create extends Vue {
       ctn: ''
     }
   }
-  editorValue: string = ''
+  // editorValue: string = ''
   classes: any = []
   // control variable
   status: number = 0 // create or change, change is 1, create is 0, default create
@@ -64,7 +64,7 @@ export default class Create extends Vue {
     data = Object.assign({}, this.article, { timestamp: Date.now() })
     data = { data: JSON.stringify(data) }
 
-    fetchItem(resource.articles.put, { data: data }, (res) => {
+    fetchItem(resource.articles.post, { data: data }, (res) => {
       let r = handleRes(res, { successMsg: '添加成功' })
       if (r) {
         this.$router.push(String(res.result.id))
@@ -72,14 +72,24 @@ export default class Create extends Vue {
       }
     })
   }
+
+  //  正文添加图片事件
   $imgAdd(filename, imgfile) {
-    console.log(filename)
-    let md = this.$refs.md
-    // md['$img2Url'](filename, './imgzx')
+    let formdata = new FormData(),
+      md = this.$refs.md
+    formdata.append('img', imgfile)
+
+    fetchItem(uploadImage.post, { data: formdata }, (res) => {
+      let r = handleRes(res)
+      if (r) {
+        md['$img2Url'](filename, (isProduction ? '' : 'http://localhost:3000') + res.name)
+      }
+    })
   }
   $imgDel(...arg) {
     console.log(arg)
   }
+
 
   change() {
     let data

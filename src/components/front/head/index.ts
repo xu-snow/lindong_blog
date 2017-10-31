@@ -14,14 +14,25 @@ import { isProduction } from '@/req'
   mixins: [template]
 })
 export default class Head extends Vue {
-  classesName: any = ''
   @Prop() article: any
+
+  @Prop() title: string
+
+  @Prop() digest: string
+
+  @Prop() date: string
+
+  @Prop() classesName: string
+
+  @Prop() bg: string
+
   get style() {
     let pre = isProduction ? '' : 'http://localhost:3000',
-      bg = this.article && this.article.bg.ctn
+      bg = this.article && this.bg
+
     if (bg) {
       return {
-        backgroundImage: 'url(' + pre + bg + ')'
+        backgroundImage: `url("${pre}${bg}")`
       }
     }
   }

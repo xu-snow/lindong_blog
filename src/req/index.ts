@@ -1,6 +1,7 @@
 import articles from './articles'
 import classes from './classes'
 import authorisation from './authorisation'
+import uploadImage from './uploadImage'
 import { isProduction } from './url'
 import axios from 'axios'
 
@@ -14,4 +15,4 @@ let resource = {
   classes: classes
 }
 
-export { resource, authorisation, isProduction }
+export { resource, authorisation, uploadImage, isProduction }
