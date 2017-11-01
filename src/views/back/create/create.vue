@@ -15,12 +15,13 @@
 				mu-row.small-top
 					mu-col( width="100" tablet="50" desktop="33")
 						img.bg-img(:src="article.bg.ctn", v-show="article.bg.ctn")		
-				mu-text-field(label="正文" ,:multiLine="true",:fullWidth ="true",:rows="5" ,:rowsMax="10",v-model="article.markdown", :disabled="disabled")
-				div(style="text-align: center")
-					mu-raised-button(label="提交" type="submit", v-show="!disabled") 
-					mu-raised-button(label="修改" type="button", @click="toggle", v-show="disabled")
+				//- mu-text-field(label="正文" ,:multiLine="true",:fullWidth ="true",:rows="5" ,:rowsMax="10",v-model="article.markdown", :disabled="disabled")
 				div
-					mavon-editor(ref="md" v-model="article.markdown",@imgAdd="$imgAdd", @imgDel="$imgDel")
+					mavon-editor(ref="md" v-model="article.markdown",@imgAdd="$imgAdd", @imgDel="$imgDel",:editable="!disabled")
+				mu-content-block(style="text-align: center")
+					mu-raised-button(label="提交" type="submit", v-show="!disabled",:secondary="true") 
+					mu-raised-button(label="修改" type="button", @click="toggle", v-show="disabled",:primary="true")
+				
 </template>
 
 <style lang="stylus">

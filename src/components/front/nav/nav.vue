@@ -5,7 +5,7 @@
 			mu-tabs(value="home").text
 				//- to会变成router-link
 				mu-tab(value="home" title="HOME" to="/articles")
-				mu-tab(value="about" title="ABOUT" to="/about")
+				mu-tab(value="about" title="ABOUT" href="http://xu-snow.github.io/")
 				
 </template>
 

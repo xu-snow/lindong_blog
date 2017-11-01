@@ -2,7 +2,7 @@
  * @Author: zhengxu 
  * @Date: 2017-09-21 21:43:43 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-10-27 22:17:25
+ * @Last Modified time: 2017-11-01 15:55:27
  */
 import Vue from '@/Base'
 import { Component, Watch, Prop } from 'vue-property-decorator'
@@ -45,6 +45,9 @@ export default class Create extends Vue {
   oldBg: any = ''
   oldClasses: any = ''
 
+  // 保存md图片的序号对应的服务器保存图片的地址
+  imgs_obj: Object = {}
+
   // method
   submit() {
     this.status ? this.change() : this.create()
@@ -82,12 +85,15 @@ export default class Create extends Vue {
     fetchItem(uploadImage.post, { data: formdata }, (res) => {
       let r = handleRes(res)
       if (r) {
-        md['$img2Url'](filename, (isProduction ? '' : 'http://localhost:3000') + res.name)
+        md['$img2Url'](filename, (isProduction ? '' : 'http://localhost:3000') + res.url)
+        this.imgs_obj[filename] = res.name
       }
     })
   }
-  $imgDel(...arg) {
-    console.log(arg)
+  $imgDel(filename) {
+    fetchItem(uploadImage.delete, { data: { name: this.imgs_obj[filename] } }, (res) => {
+      let r = handleRes(res)
+    })
   }
 
 

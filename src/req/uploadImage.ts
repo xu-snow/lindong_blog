@@ -13,8 +13,7 @@ const uploadImage: UploadImageInterface = {
     })
   },
   delete: reqUrl => {
-
-    return axios.delete(getUrl('articlesOne', reqUrl.params), {
+    return axios.delete(getUrl('uploadImage'), {
       data: reqUrl.data,
     })
   }
