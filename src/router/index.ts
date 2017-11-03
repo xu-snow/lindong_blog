@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { REGISTER_PATH } from '../constant/path'
+import { authorisation } from '@/req'
+import { fetchItem } from '@/handle'
 
 Vue.use(VueRouter)
 
@@ -16,7 +19,7 @@ const router = new VueRouter({
       ]
     },
     {
-      path: '/register',
+      path: REGISTER_PATH,
       component: () => import('../views/register/login')
     },
 
@@ -33,20 +36,15 @@ const router = new VueRouter({
 
       ],
       redirect: '/admin/articles',
-      // beforeEnter(to, from, next) {
-      //   let temp = Number(to.path === '/admin/login') + '-' + Number(sessionStorage.getItem('isLogin'))
-      //   switch (temp) {
-      //     case '1-1':
-      //       next('/admin/articles')
-      //       break
-      //     case '0-0':
-      //       next('/admin/login')
-      //       break
-      //     default:
-      //       next()
-      //       break
-      //   }
-      // }
+      beforeEnter(to, from, next) {
+        fetchItem(authorisation.isLogin, undefined, (res) => {
+          if (res && res.islogin) {
+            next()
+          } else {
+            next(renderRegisterParams(to))
+          }
+        })
+      }
     },
     {
       path: '*',
@@ -60,19 +58,23 @@ const router = new VueRouter({
 })
 
 
-router.beforeEach((to, from, next) => {
-  // if (process.env.NODE_ENV === 'production') {
-  if (to.matched.some(record => record.meta.requireAuth)) {
-    sessionStorage.getItem('isLogin')
-      ? next()
-      : next({ path: '/register', query: { redirect: to.fullPath } })
-  } else {
-    next()
-  }
-  // } else {
-  //   next()
-  // }
-})
+// router.beforeEach((to, from, next) => {
+//   // if (process.env.NODE_ENV === 'production') {
+//   if (to.matched.some(record => record.meta.requireAuth)) {
+//     sessionStorage.getItem('isLogin')
+//       ? next()
+//       : next(renderRegisterParams(to))
+//   } else {
+//     next()
+//   }
+//   // } else {
+//   //   next()
+//   // }
+// })
+
+const renderRegisterParams = function (route) {
+  return { path: REGISTER_PATH, query: { redirect: route.fullPath } }
+}
 
 
-export { router }
+export { router, renderRegisterParams }

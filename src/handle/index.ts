@@ -1,6 +1,7 @@
 import { AxiosResponse, AxiosPromise } from 'axios'
 import Vue from 'vue'
 import identity from 'lodash/identity'
+import { router, renderRegisterParams } from '../router'
 
 /**
  * 提示框
@@ -32,11 +33,27 @@ export const handleRes = (res, options: { errorMsg?: string, successMsg?: string
 export function checkStatus(response: AxiosResponse) {
   if (response.status >= 200 && response.status < 300) {
     return response
+  } else if (response.status === 401) { // 未登陆,跳到登录页
+    setTimeout(function () {
+      router.push(renderRegisterParams(router.currentRoute))
+    }, 1500)
+    errorHandler(response, '需登陆')
   } else { // todo 这里还有东西要写
-    let error = new Error(response.statusText)
-    error['response'] = response
-    throw error
+    errorHandler(response)
   }
+}
+
+
+/**
+ * 处理非正常返回的数据
+ * 
+ * @param {AxiosResponse} response 
+ * @param {string} [msg] 提示信息
+ */
+function errorHandler(response: AxiosResponse, msg?: string) {
+  let error = new Error(msg || response.statusText)
+  error['response'] = response
+  throw error
 }
 
 export function parseJson(response: AxiosResponse) {
@@ -65,7 +82,3 @@ export function fetchItem(task: { (reqUrl: UrlConfig): AxiosPromise }, body: Url
       cb2 && cb2()
     })
 }
-
-// export function returnfetchData(...arg) {
-//   return fetchItem(arg[0], arg[1], identity)
-// }
