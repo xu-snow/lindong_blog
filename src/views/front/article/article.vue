@@ -5,7 +5,8 @@
 			:digest="getProperty('digest')",
 			:date="getProperty('date')",
 			:classesName="getProperty('classes.name')",
-			:bg="getProperty('bg.ctn')")
+			:bg="getProperty('bg.ctn')",
+			:lastTime="getProperty('last_time')")
 
 		section.g-container.f-flex
 			main.g-mn.f-flex-item-1

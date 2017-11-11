@@ -4,6 +4,7 @@
 			p.title {{title ? title : 'LinDong BLOG'}}
 			p.descript {{digest ? digest : '当幸福来敲门'}}
 			p.date(v-if="article") {{date + ' | ' + classesName}}
+			p.data(v-if="lastTime") {{'Updated: ' + lastTime }}
 </template>
 <style lang="stylus">
 	.g-hd

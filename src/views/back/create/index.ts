@@ -2,7 +2,7 @@
  * @Author: zhengxu 
  * @Date: 2017-09-21 21:43:43 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-11-01 15:55:27
+ * @Last Modified time: 2017-11-11 15:22:13
  */
 import Vue from '@/Base'
 import { Component, Watch, Prop } from 'vue-property-decorator'
@@ -83,7 +83,7 @@ export default class Create extends Vue {
     formdata.append('img', imgfile)
 
     fetchItem(uploadImage.post, { data: formdata }, (res) => {
-      let r = handleRes(res)
+      const r = handleRes(res)
       if (r) {
         md['$img2Url'](filename, (isProduction ? '' : 'http://localhost:3000') + res.url)
         this.imgs_obj[filename] = res.name
@@ -92,7 +92,7 @@ export default class Create extends Vue {
   }
   $imgDel(filename) {
     fetchItem(uploadImage.delete, { data: { name: this.imgs_obj[filename] } }, (res) => {
-      let r = handleRes(res)
+      const r = handleRes(res)
     })
   }
 
