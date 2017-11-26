@@ -2,12 +2,12 @@
  * @Author: zhengxu 
  * @Date: 2017-09-22 10:09:16 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-10-24 15:59:42
+ * @Last Modified time: 2017-11-27 01:43:36
  */
 import Vue from '@/Base'
 import { Component, Watch } from 'vue-property-decorator'
 import template from './list.vue'
-import articleList from '@/components/back/table'
+import articleList from '@/components/back/Table'
 import { resource } from '@/req'
 import { handleRes, fetchItem, parseJson } from '@/handle'
 

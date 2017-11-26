@@ -2,12 +2,12 @@
  * @Author: zhengxu 
  * @Date: 2017-09-20 14:18:12 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-10-20 16:51:09
+ * @Last Modified time: 2017-11-27 01:43:17
  */
 import Vue from '@/Base'
 import { Component } from 'vue-property-decorator'
 import template from './classes.vue'
-import classList from '@/components/back/table'
+import classList from '@/components/back/Table'
 import { resource } from '@/req'
 import { handleRes, fetchItem } from '@/handle'
 
