@@ -17,29 +17,41 @@
 						img.bg-img(:src="article.bg.ctn", v-show="article.bg.ctn")		
 				//- mu-text-field(label="正文" ,:multiLine="true",:fullWidth ="true",:rows="5" ,:rowsMax="10",v-model="article.markdown", :disabled="disabled")
 				div
-					mavon-editor(ref="md" v-model="article.markdown",@imgAdd="$imgAdd", @imgDel="$imgDel",:editable="!disabled")
+					mavon-editor.markedit(ref="md"  v-model="article.markdown",@imgAdd="$imgAdd", @imgDel="$imgDel",:editable="!disabled")
 				mu-content-block(style="text-align: center")
 					mu-raised-button(label="提交" type="submit", v-show="!disabled",:secondary="true") 
 					mu-raised-button(label="修改" type="button", @click="toggle", v-show="disabled",:primary="true")
 				
 </template>
 
-<style lang="stylus">
-	.file-img
-		position absolute
-		width 100%
-		height 100%
-		left 0
-		top 0
-		opacity 0
-	.admin-create
-		.bg-img
-			width 100%
-		.small-top
-			margin-top 10px
-	#editor
-		margin auto
-		width 80%;
-		height  580px
+<style lang="scss">
+	.file-img{
+		position: absolute;
+		width:100%;
+		height:100%;
+		left:0;
+		top:0;
+		opacity:0;
+	}
+	.admin-create{
+		.bg-img{
+			width:100%
+		}
+		.small-top{
+			margin-top:10px
+		}	
+	}	
+	#editor{
+		margin:auto;
+		width:80%;
+		height:580px;
+	}
+	.markedit{
+		max-height: 500px;
+		&.fullscreen{
+			max-height: none;
+		}
+	}
+
     
 </style>

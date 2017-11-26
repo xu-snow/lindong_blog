@@ -1,9 +1,9 @@
 var gulp = require('gulp')
 
 gulp.task('moveStatic', () => {
-	gulp
-		.src('./dist/**')
-		.pipe(gulp.dest('../server/public/'))
+    gulp
+        .src('./dist/**')
+        .pipe(gulp.dest('../node_server/public/'))
 })
 
 // gulp.task('moveIndex', () => {
@@ -12,4 +12,4 @@ gulp.task('moveStatic', () => {
 // 		.pipe(gulp.dest('../server/public/'))
 // })
 
-gulp.task('default', ['moveStatic', 'moveIndex'])
+gulp.task('default', ['moveStatic'])

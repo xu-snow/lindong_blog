@@ -2,7 +2,7 @@
  * @Author: zhengxu 
  * @Date: 2017-09-20 14:22:13 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-11-11 10:53:21
+ * @Last Modified time: 2017-11-26 16:12:56
  */
 /**
  * 所有组件的基类
@@ -19,7 +19,7 @@ class Base extends Vue {
 
 declare namespace Base {
   type Route = R.Route
-  type next = (to?: R.RawLocation | false | ((vm: Vue) => any) | void) => void
+  type next = (to?: R.RawLocation | false | ((vm: any) => any) | void) => void
 }
 
 export default Base

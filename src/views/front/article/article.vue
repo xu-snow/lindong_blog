@@ -10,7 +10,7 @@
 
 		section.g-container.f-flex
 			main.g-mn.f-flex-item-1
-				div.markdown-body(v-html="article.html")
+				div.markdown-body(v-html="_html")
 
 			aside.g-sd
 				side-class
