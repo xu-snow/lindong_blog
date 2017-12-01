@@ -7,7 +7,7 @@
 import Vue from '@/Base'
 import { Component, Watch, Prop } from 'vue-property-decorator'
 import template from './app.vue'
-import myNav from '@/components/back/Nav'
+import myNav from '@/components/back/nav'
 
 @Component({
   mixins: [template],

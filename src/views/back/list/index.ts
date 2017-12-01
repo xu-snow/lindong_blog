@@ -7,7 +7,7 @@
 import Vue from '@/Base'
 import { Component, Watch } from 'vue-property-decorator'
 import template from './list.vue'
-import articleList from '@/components/back/Table'
+import articleList from '@/components/back/table'
 import { resource } from '@/req'
 import { handleRes, fetchItem, parseJson } from '@/handle'
 

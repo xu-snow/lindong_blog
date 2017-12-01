@@ -7,7 +7,7 @@
 import Vue from '@/Base'
 import { Component } from 'vue-property-decorator'
 import template from './classes.vue'
-import classList from '@/components/back/Table'
+import classList from '@/components/back/table'
 import { resource } from '@/req'
 import { handleRes, fetchItem } from '@/handle'
 
