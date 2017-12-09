@@ -14,7 +14,7 @@
 						input.file-img(type="file", @change="uploadImg($event)", :disabled="disabled")
 				mu-row.small-top
 					mu-col( width="100" tablet="50" desktop="33")
-						img.bg-img(:src="article.bg.ctn", v-show="article.bg.ctn")		
+						img.bg-img(:src="article.bg.ctn", v-show="article.bg.ctn")
 				//- mu-text-field(label="正文" ,:multiLine="true",:fullWidth ="true",:rows="5" ,:rowsMax="10",v-model="article.markdown", :disabled="disabled")
 				div
 					mavon-editor.markedit(ref="md"  v-model="article.markdown",@imgAdd="$imgAdd", @imgDel="$imgDel",:editable="!disabled")

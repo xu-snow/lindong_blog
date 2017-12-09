@@ -23,6 +23,16 @@ exports.cssLoaders = function (options) {
   // generate loader string to be used with extract text plugin
   function generateLoaders (loader, loaderOptions) {
     var loaders = [cssLoader]
+    // 对import进来的css autoprefixer 处理
+    if (options.postcss) {
+      loaders.push({
+        loader: 'postcss-loader',
+        options: Object.assign({}, loaderOptions, {
+          sourceMap: options.sourceMap
+        })
+      });
+    }
+
     if (loader) {
       loaders.push({
         loader: loader + '-loader',
