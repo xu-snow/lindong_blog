@@ -3,7 +3,7 @@
 		mu-table(:showCheckbox="false",v-show="datas.length")
 			mu-thead
 				mu-tr
-					mu-th(v-for="name in names" key="name") {{name}}
+					mu-th(v-for="name in names", :key="name") {{name}}
 					mu-th 操作
 			mu-tbody
 				mu-tr(v-for="(item,k) in datas", :key="item.id")
