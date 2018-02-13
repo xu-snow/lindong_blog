@@ -56,8 +56,8 @@ function errorHandler(response: AxiosResponse, msg?: string) {
   throw error
 }
 
-export function parseJson(response: AxiosResponse) {
-  return response.data
+export function parseJson(response?: AxiosResponse) {
+  return response && response.data
 }
 
 /**
