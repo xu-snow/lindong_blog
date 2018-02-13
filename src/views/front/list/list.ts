@@ -2,7 +2,7 @@
  * @Author: zhengxu 
  * @Date: 2017-09-21 15:44:41 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-09-29 21:01:04
+ * @Last Modified time: 2017-12-20 21:37:18
  */
 import Vue from '@/Base'
 import { Component, Watch, Prop } from 'vue-property-decorator'
@@ -27,7 +27,7 @@ import { fetchItem } from '@/handle'
 export default class List extends Vue {
   articles: any = []
   beforeRouteEnter(to: Vue.Route, from: Vue.Route, next: Vue.next) {
-    fetchItem(resource.articles.get, { params: to.query }, (res) => {
+    fetchItem(resource.articles.get, { data: to.query }, (res) => {
       next((vm: List) => {
         vm.articles = res.articles
       })

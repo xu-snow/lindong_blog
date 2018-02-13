@@ -2,7 +2,7 @@
  * @Author: zhengxu 
  * @Date: 2017-11-15 21:45:25 
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-11-15 21:52:32
+ * @Last Modified time: 2018-01-05 10:03:15
  */
 
 /**
@@ -15,7 +15,6 @@
  * use:npm run buildFolder -- --path views/front/app
  */
 
-var minimist = require('minimist')
 var fs = require('fs');
 var path = require('path')
 var args = require('minimist')(process.argv.slice(2));

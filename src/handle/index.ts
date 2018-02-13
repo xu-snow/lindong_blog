@@ -1,6 +1,5 @@
 import { AxiosResponse, AxiosPromise } from 'axios'
 import Vue from 'vue'
-import identity from 'lodash/identity'
 import { router, renderRegisterParams } from '../router'
 
 /**
