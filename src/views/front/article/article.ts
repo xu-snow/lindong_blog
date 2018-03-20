@@ -2,12 +2,12 @@
  * @Author: zhengxu
  * @Date: 2017-09-21 15:44:53
  * @Last Modified by: zhengxu
- * @Last Modified time: 2018-02-13 15:24:45
+ * @Last Modified time: 2018-03-21 00:57:15
  */
 import Vue from '@/Base'
 import { Component, Watch, Prop } from 'vue-property-decorator'
 import * as MarkdownIt from 'markdown-it'
-import * as mh from 'markdown-it-highlightjs'
+import mh from '@/handle/markdown-it-highlightjs'
 import template from './article.vue'
 import myHead from '@/components/front/head'
 import myFoot from '@/components/front/foot'
