@@ -26,8 +26,8 @@ export const handleRes = (res, options: { errorMsg?: string, successMsg?: string
 /**
  * 检查请求数据
  * @export
- * @param {AxiosResponse} response 
- * @returns 
+ * @param {AxiosResponse} response
+ * @returns
  */
 export function checkStatus(response: AxiosResponse) {
   if (response.status >= 200 && response.status < 300) {
@@ -45,8 +45,8 @@ export function checkStatus(response: AxiosResponse) {
 
 /**
  * 处理非正常返回的数据
- * 
- * @param {AxiosResponse} response 
+ *
+ * @param {AxiosResponse} response
  * @param {string} [msg] 提示信息
  */
 function errorHandler(response: AxiosResponse, msg?: string) {
@@ -61,7 +61,7 @@ export function parseJson(response?: AxiosResponse) {
 
 /**
  * 通用取数据并处理
- * 
+ *
  * @export
  * @param {Function} task  请求任务
  * @param {{params?:Object,data?:Object}} body [params通常是组成api的参数，data为请求参数]
