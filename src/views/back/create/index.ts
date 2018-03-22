@@ -1,8 +1,8 @@
 /*
- * @Author: zhengxu 
- * @Date: 2017-09-21 21:43:43 
+ * @Author: zhengxu
+ * @Date: 2017-09-21 21:43:43
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-11-11 15:22:13
+ * @Last Modified time: 2018-03-23 01:07:35
  */
 import Vue from '@/Base'
 import { Component, Watch, Prop } from 'vue-property-decorator'
@@ -55,10 +55,10 @@ export default class Create extends Vue {
 
   create() {
     let data
-    if (!this.article.bg.name) {
-      this.$toast.error('请添加背景图')
-      return false
-    }
+    // if (!this.article.bg.name) { // todo
+    //   this.$toast.error('请添加背景图')
+    //   return false
+    // }
     if (!this.article.classes) {
       this.$toast.error('请选择分类')
       return false
@@ -149,7 +149,7 @@ export default class Create extends Vue {
         if (res[1]) {
           article = res[1].article
           article.classes = article.classes.id
-          article.bg.ctn = (isProduction ? '' : 'http://localhost:3000') + article.bg.ctn
+          article.bg.ctn = article.bg.ctn && (isProduction ? '' : 'http://localhost:3000') + article.bg.ctn
         }
         next((vm: Create) => {
           vm.classes = classes

@@ -1,8 +1,8 @@
 /*
- * @Author: zhengxu 
- * @Date: 2017-09-21 15:49:35 
+ * @Author: zhengxu
+ * @Date: 2017-09-21 15:49:35
  * @Last Modified by: zhengxu
- * @Last Modified time: 2017-11-11 18:13:03
+ * @Last Modified time: 2018-03-22 01:12:58
  */
 import Vue from '@/Base'
 import { Component, Prop } from 'vue-property-decorator'
@@ -31,7 +31,7 @@ export default class Head extends Vue {
   get style() {
     let pre = isProduction ? '' : 'http://localhost:3000',
       bg = this.article && this.bg
-
+    // todo
     if (bg) {
       return {
         backgroundImage: `url("${pre}${bg}")`
