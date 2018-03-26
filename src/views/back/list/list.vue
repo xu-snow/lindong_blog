@@ -6,7 +6,7 @@
 				mu-menu(@itemClick="handleClose")
 					mu-menu-item(title="全部", to="/admin/articles")
 					mu-menu-item(v-for="item,index in classes",
-						:key="index", 
+						:key="index",
 						:title="item.name",
 						:to="{ path: '/admin/articles', query: {filter: item.name} }"
 					)
@@ -19,6 +19,8 @@
 				:datas="datas"
 				@change="change"
 				@remove="remove")
+
+		mu-pagination.article-list-pagination(v-show="isShowPag",:current="current" ,:defaultPageSize="defaultPageSize",:total="total" ,@pageChange="pageChange")
 </template>
 
 <style lang="scss">

@@ -14,19 +14,10 @@ import sideAbout from '@/components/front/about'
 import listItem from '@/components/front/item'
 import { pageSize } from '@/constant/pageSize'
 import { resource } from '@/req'
-import { fetchItem } from '@/handle'
+import { fetchItem, fetchArticles } from '@/handle'
 import assign from 'lodash/assign'
 
-interface FetchArticlesInterface {
-    (data: any, cb: { (res: ArticlesResponse): void }): void
-}
 
-const fetchArticles: FetchArticlesInterface = function (data, cb) {
-    data.limit = pageSize
-    fetchItem(resource.articles.get, { data }, (res: ArticlesResponse) => {
-        cb(res)
-    })
-}
 @Component({
     mixins: [template],
     components: {
@@ -45,7 +36,7 @@ export default class List extends Vue {
 
 
 
-    get isShowPag(){
+    get isShowPag() {
         return this.total > pageSize
     }
 
@@ -85,7 +76,7 @@ export default class List extends Vue {
 
     beforeRouteUpdate(to: Vue.Route, from: Vue.Route, next: Vue.next) {
         // !
-         this.total = 1
+        this.total = 1
         fetchArticles(to.query, (res) => {
             next()
             this.articles = res.articles

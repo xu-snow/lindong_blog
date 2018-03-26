@@ -1,6 +1,8 @@
 import { AxiosResponse, AxiosPromise } from 'axios'
 import Vue from 'vue'
 import { router, renderRegisterParams } from '../router'
+import { pageSize } from '@/constant/pageSize'
+import { resource } from '@/req'
 
 /**
  * 提示框
@@ -79,5 +81,16 @@ export function fetchItem(task: { (reqUrl: UrlConfig): AxiosPromise }, body: Url
     .catch(e => {
       Vue.$toast.error(e && e.message)
       cb2 && cb2()
+    })
+}
+
+interface FetchArticlesInterface {
+    (data: any, cb?: { (res: ArticlesResponse): void }): Promise<any>
+}
+
+export const fetchArticles: FetchArticlesInterface = function (data, cb?) {
+    data.limit = pageSize
+    return fetchItem(resource.articles.get, { data }, (res: ArticlesResponse) => {
+        cb && cb(res)
     })
 }
